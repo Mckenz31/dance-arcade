@@ -3,8 +3,8 @@ import './App.css';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import Home from './Pages/HomePage/Home';
-import Game from './Pages/GamePage/Game';
-import Test from './Pages/test/Test'
+
+import Game from './Pages/Game/Game'
 import * as PIXI from 'pixi.js'
 
 function App() {
@@ -24,10 +24,7 @@ function App() {
           <Route path="/Home"><Home/></Route>
         </Switch>
         <Switch>
-          <Route path="/Game"><Game/></Route>
-        </Switch>
-        <Switch>
-          <Route path="/Test"><Test app={app}/></Route>
+          <Route path="/Game"><Game app={app}/></Route>
         </Switch>
       </Router>
        

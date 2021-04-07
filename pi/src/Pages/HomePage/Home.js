@@ -4,39 +4,12 @@ import BgVideo from '../../video/bgvideo.mp4';
 import './HomeStyles.js'
 import {HomeContainer} from './HomeStyles'
 
-
-// const useAudio = url => {
-//     const [audio] = useState(new Audio(url));
-//     const [playing, setPlaying] = useState(false);
-  
-//     const toggle = () => setPlaying(!playing);
-  
-//     useEffect(() => {
-//         playing ? audio.play() : audio.pause();
-//       },
-//       [playing]
-//     );
-  
-//     useEffect(() => {
-//         audio.autoplay=true;
-//       audio.addEventListener('ended', () => setPlaying(true));
-//       return () => {
-//         audio.removeEventListener('ended', () => setPlaying(true));
-//       };
-//     }, []);
-  
-//     return [playing, toggle];
-//   };
-
 const Home = () => {
     
     const bgm=useRef(new Audio(BGM))
     const [showAboutUs,setShowAboutUs]=useState(false)
-    // const [playing, toggle] = useAudio(BGM);
     useEffect(()=>{
-        bgm.current.play()
-        // bgm.autoplay="true";
-        // bgm.play()
+        bgm.current.play();
     },[bgm])
     
     return (
@@ -65,16 +38,7 @@ const Home = () => {
           <span></span>
             Start game</a>
         </div>
-        <div>
-          <a href="/Test">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-            Test game</a>
-        </div>
-        <div>
-         
+        <div>  
           <a >
           <span></span>
           <span></span>
