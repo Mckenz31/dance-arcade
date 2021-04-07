@@ -1,50 +1,28 @@
-import React,{useState,useEffect,useContext,useRef} from 'react'
+import React,{useEffect,useRef,useState} from 'react'
 import * as PIXI from 'pixi.js'
 import LeftArrow from '../../images/left-arrow.png'
 import RightArrow from '../../images/right.png'
-import gsap,{TweenMax} from 'gsap'
+import {TweenMax,Linear} from 'gsap'
+// import data from './data'
+import BgVideo from '../../video/bgvideo.mp4';
+import axios from 'axios';
 
+const Game = ({app}) => {
+    const timer=useRef();
+    const myVar =useRef();
+    const [data,setData]=useState([])
+ 
+    let player=useRef();
+    useEffect(()=>{
+      getData()
+    },[]);
 
-const Test = ({app}) => {
-    let [count, setCount] = useState(0);
-    // let App=useRef()
-    function useInterval(callback, delay) {
-        const savedCallback = useRef();
-      
-        // Remember the latest callback.
-        useEffect(() => {
-          savedCallback.current = callback;
-        }, [callback]);
-      
-        // Set up the interval.
-        useEffect(() => {
-          function tick() {
-            savedCallback.current();
-          }
-          if (delay !== null) {
-            let id = setInterval(tick, delay);
-            return () => clearInterval(id);
-          }
-        }, [delay]);
-      }
-     
-    let player=useRef()
-    const [bullet,setBullet]=useState([]);
-    const bulletSpeed=10;
-    const [movementList,setMovementList]=useState([])
-    console.log(app)
-    const MovementArrowCreator=(key,posx,posy)=>{
-        // let app=App.current
-        let movement = new PIXI.Sprite.from(key);
-        movement.anchor.set(0.5);
-        movement.scale.set(0.1,0.1)
-        movement.x=posx;
-        movement.y=posy;
-        movement.speed=10;
-        app.stage.addChild(movement);
-        setMovementList((prev)=>[...prev,movement])
-        return movement;
+    const getData = async ()=>{
+      let data=await axios.get('http://localhost:3000/steps')
+      setData(data.data)
+      console.log(data.data)
     }
+
     const CreateArrow = (image,scalex,scaley,posx,posy,rotation=0) => {
         let left = PIXI.Sprite.from(image);
         left.anchor.set(0.5);
@@ -61,45 +39,73 @@ const Test = ({app}) => {
         return left
     }
     const OnLoad =()=>{
-  
-        let Player =player.current
-      
         document.querySelector('.GameContainer').appendChild(app.view)
         app.stage.interactive=true;
-        // app.stage.on("pointerdown",trigger)
-        console.log(app)
-        // arrow image
         CreateArrow(LeftArrow,0.1,0.1,100,150);
         CreateArrow(LeftArrow,0.1,0.1,200,150,1.575);
         CreateArrow(RightArrow,0.07,0.06,300,150);
         CreateArrow(LeftArrow,0.1,0.1,400,150,-1.575);
-
-     
     }
 
-    useInterval(() => {
-        // Your custom logic here
-        const left=CreateArrow(LeftArrow,0.1,0.1,100,700)
-        const up =CreateArrow(LeftArrow,0.1,0.1,200,700,1.575);
-        const right=CreateArrow(RightArrow,0.07,0.06,300,700);
-        const down = CreateArrow(LeftArrow,0.1,0.1,400,700,-1.575);
-        TweenMax.fromTo(left,2,{
-            y:500,yoyo:false,yoyoEase:false
-        },{y:150})
-        TweenMax.fromTo(right,2,{
-                    y:500,yoyo:false,yoyoEase:false
-                },{y:150})
-        TweenMax.fromTo(up,2,{
-                    y:500,yoyo:false,yoyoEase:false
-                },{y:150})
-        TweenMax.fromTo(down,2,{
-                    y:500,yoyo:false,yoyoEase:false
-                },{y:150})
-      }, 2000);
-
+const PlayLeftArrow =()=>{
+  const left=CreateArrow(LeftArrow,0.1,0.1,100,700)
+    TweenMax.to(left,2,{
+        y:150,ease:Linear.easeNone
+    })
+}
+const PlayUpArrow =()=>{
+  const up =CreateArrow(LeftArrow,0.1,0.1,200,700,1.575);
+    TweenMax.to(up,2,{
+      y:150,ease:Linear.easeNone
+  })
+}
+const PlayRightArrow =()=>{
+  const right=CreateArrow(RightArrow,0.07,0.06,300,700);
+    TweenMax.to(right,2,{
+      y:150,ease:Linear.easeNone
+  })
+}
+const PlayDownArrow =()=>{
+  const down = CreateArrow(LeftArrow,0.1,0.1,400,700,-1.575);
+    TweenMax.to(down,2,{
+      y:150,ease:Linear.easeNone
+  })
+}
     useEffect(()=>{
         OnLoad()
-  
+    },[])
+    const PlayArrows=(data)=>{
+      var counter = 0;
+    var limit = data.length-1;
+    myVar.current = setInterval(function(){ 
+    if (counter === limit)
+    {
+        clearInterval(myVar.current);
+        console.log('cleared')
+    }
+    let key = Object.keys(data[counter]).find(k=>data[counter][k]===true);
+    console.log(key) 
+    switch(key){
+      case 'one':
+        PlayLeftArrow()
+        break;
+      case 'two':
+        PlayUpArrow()
+        break;
+      case 'three':
+        PlayRightArrow()
+        break;
+      case 'four':
+        PlayDownArrow()
+        break;
+    }
+    counter++;
+    }, 500);
+    }
+    useEffect(() => {
+      if(data.length){
+        PlayArrows(data)
+      }
     },[])
     return (
         <div className="GameContainer">
@@ -107,7 +113,7 @@ const Test = ({app}) => {
     )
 }
 
-export default Test
+export default Game
 
 
 
