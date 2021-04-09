@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js'
 import LeftArrow from '../../images/left-arrow.png'
 import RightArrow from '../../images/right.png'
 import {TweenMax,Linear} from 'gsap'
-// import data from './data'
+import {GameContainer} from './GameStyles';
 import BgVideo from '../../video/bgvideo.mp4';
 import axios from 'axios';
 
@@ -15,12 +15,14 @@ const Game = ({app}) => {
     let player=useRef();
     useEffect(()=>{
       getData()
+      
     },[]);
 
     const getData = async ()=>{
       let data=await axios.get('http://localhost:3000/steps')
       setData(data.data)
-      console.log(data.data)
+      console.log(data.data);
+      
     }
 
     const CreateArrow = (image,scalex,scaley,posx,posy,rotation=0) => {
@@ -39,7 +41,7 @@ const Game = ({app}) => {
         return left
     }
     const OnLoad =()=>{
-        document.querySelector('.GameContainer').appendChild(app.view)
+        document.querySelector('.GameBox').appendChild(app.view)
         app.stage.interactive=true;
         CreateArrow(LeftArrow,0.1,0.1,100,150);
         CreateArrow(LeftArrow,0.1,0.1,200,150,1.575);
@@ -103,13 +105,19 @@ const PlayDownArrow =()=>{
     }, 500);
     }
     useEffect(() => {
-      if(data.length){
+      if(data.length>0){
         PlayArrows(data)
       }
-    },[])
+    },[data])
     return (
-        <div className="GameContainer">
+      <GameContainer > 
+         <video className="gamevideo" autoPlay loop muted>
+          <source src={BgVideo} type="video/mp4"/>
+        </video>
+    
+        <div className="GameBox">
         </div>
+      </GameContainer>
     )
 }
 

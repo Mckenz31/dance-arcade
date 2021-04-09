@@ -11,7 +11,7 @@ function App() {
   const app=new PIXI.Application({
     width:window.innerWidth,
     height:window.innerHeight,
-    backgroundColor:0xAAAAAA
+    transparent:true
   })
   console.log(app)
   return (
