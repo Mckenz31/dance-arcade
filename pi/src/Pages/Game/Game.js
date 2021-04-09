@@ -103,7 +103,7 @@ const PlayDownArrow =()=>{
     }, 500);
     }
     useEffect(() => {
-      if(data.length){
+      if(data.length>0){
         PlayArrows(data)
       }
     },[])
