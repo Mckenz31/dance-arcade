@@ -6,6 +6,7 @@ import Home from './Pages/HomePage/Home';
 
 import Game from './Pages/Game/Game'
 import * as PIXI from 'pixi.js'
+import Test from './Pages/Test/Test';
 
 function App() {
   const app=new PIXI.Application({
@@ -25,6 +26,9 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/Game"><Game app={app}/></Route>
+        </Switch>
+        <Switch>
+          <Route path="/testing"><Test app={app}/></Route>
         </Switch>
       </Router>
        

@@ -2,13 +2,13 @@ import React,{useEffect,useState,useRef} from 'react'
 import BGM from '../../video/bgm.mp3'
 import BgVideo from '../../video/bgvideo.mp4';
 import * as PIXI from 'pixi.js'
-import {GameContainer} from './GameStyles';
+import {HomeContainer} from './testStyles'
 import LeftArrow from '../../images/left-arrow.png'
 import RightArrow from '../../images/right.png'
 import {TweenMax,Linear} from 'gsap';
 import axios from 'axios';
 
-const Game = ({app}) => {
+const Test = ({app}) => {
     
     const myVar =useRef();
     const [data,setData]=useState([])
@@ -126,7 +126,7 @@ const Game = ({app}) => {
       <React.Fragment>
 
 
-        <GameContainer className="showcase">
+        <HomeContainer className="showcase">
            <section >
     <video className="video" autoPlay loop muted style={{zIndex:'-100'}}>
       <source src={BgVideo} type="video/mp4"/>
@@ -136,9 +136,9 @@ const Game = ({app}) => {
      
        
   </section>
-        </GameContainer>
+        </HomeContainer>
       </React.Fragment>
     )
 }
 
-export default Game
+export default Test
