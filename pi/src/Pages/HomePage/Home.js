@@ -10,7 +10,7 @@ const Home = () => {
     const [showAboutUs,setShowAboutUs]=useState(false)
     useEffect(()=>{
         bgm.current.play();
-    },[bgm])
+    },[])
     
     return (
         <HomeContainer className="showcase">

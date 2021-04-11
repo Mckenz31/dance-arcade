@@ -17,6 +17,12 @@ export const GameContainer=styled.div`
     background: #111;
     transition: 0.5s;
     z-index: 2;
+    .center{
+        width:100%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
     }
     .showcase.active
     {
@@ -32,5 +38,11 @@ export const GameContainer=styled.div`
     height: 100%;
     object-fit: cover;
     opacity: 0.8;
+    }
+    .center{
+        width:100%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
