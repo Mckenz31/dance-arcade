@@ -121,6 +121,7 @@ const Game = ({ app }) => {
     if (data.length > 0) {
       PlayArrows(data);
     }
+
   }, [data,PlayArrows]);
 
   useEffect(() => {
@@ -146,6 +147,7 @@ const Game = ({ app }) => {
           
           <Timer setStartGame={setStartGame}/>
           
+
         </div>
       </GameContainer>
         
