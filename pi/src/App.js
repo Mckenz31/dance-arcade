@@ -1,12 +1,9 @@
 
 import './App.css';
-import LandingPage from './Pages/LandingPage/LandingPage';
+import {SinglePlayer,MultiPlayer,LandingPage,Home,Test,AuthScreen} from './Pages'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-import Home from './Pages/HomePage/Home';
-import {useState} from 'react'
-import Game from './Pages/Game/Game'
+
 import * as PIXI from 'pixi.js'
-import Test from './Pages/Test/Test';
 
 function App() {
   const app=new PIXI.Application({
@@ -26,7 +23,13 @@ function App() {
           <Route path="/Home"><Home/></Route>
         </Switch>
         <Switch>
-          <Route path="/Game"><Game app={app} /></Route>
+          <Route path="/single-player"><SinglePlayer app={app} /></Route>
+        </Switch>
+        <Switch>
+          <Route path="/multi-player"><MultiPlayer /></Route>
+        </Switch>
+        <Switch>
+          <Route path="/auth"><AuthScreen /></Route>
         </Switch>
         <Switch>
           <Route path="/testing"><Test app={app} /></Route>

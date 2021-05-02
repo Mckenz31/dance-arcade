@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef,useCallback } from "react";
 import BGM from "../../video/bgm.mp3";
-import BgVideo from "../../video/bgvideo.mp4";
+import BgVideo from "../../video/bgVideo2.mp4";
 import * as PIXI from "pixi.js";
 import { GameContainer } from "./GameStyles";
 import LeftArrow from "../../images/left-arrow.png";
@@ -14,13 +14,37 @@ const Game = ({ app }) => {
   const [startgame,setStartGame]=useState(false)
   useEffect(() => {
     if(startgame){
-      getData();
+      setData([ //Game data
+        {one:true, two:false, three:false, four:false},
+        {one:false, two:false, three:false, four:true},
+        {one:false, two:false, three:true, four:false},
+        {one:true, two:false, three:false, four:false},
+        {one:false, two:true, three:false, four:false},
+        {one:false, two:false, three:true, four:false},
+        {one:false, two:false, three:true, four:false},
+        {one:false, two:false, three:false, four:true},
+        {one:false, two:false, three:true, four:false},
+        {one:false, two:false, three:false, four:true},
+        {one:false, two:true, three:false, four:false},
+      ]);
     }
   }, [startgame]);
 
   const getData = async () => {
     let data = await axios.get("http://localhost:3000/steps");
-    setData(data.data);
+    setData([ //Game data
+      {one:true, two:false, three:false, four:false},
+      {one:false, two:false, three:false, four:true},
+      {one:false, two:false, three:true, four:false},
+      {one:true, two:false, three:false, four:false},
+      {one:false, two:true, three:false, four:false},
+      {one:false, two:false, three:true, four:false},
+      {one:false, two:false, three:true, four:false},
+      {one:false, two:false, three:false, four:true},
+      {one:false, two:false, three:true, four:false},
+      {one:false, two:false, three:false, four:true},
+      {one:false, two:true, three:false, four:false},
+    ]);
     console.log(data.data);
   };
 

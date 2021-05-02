@@ -31,12 +31,20 @@ const Home = () => {
       <div class="text">
 
       <div>
-          <a href="/Game">
+          <a href="/single-player">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-            Start game</a>
+            Single Player</a>
+        </div>
+      <div>
+          <a href="/multi-player">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+            Multi Player</a>
         </div>
         <div>  
           <a >
