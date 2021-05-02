@@ -18,12 +18,18 @@ const Auth = () => {
                     </div>
                     <div className="formBx">
                         <form>
-                            <h2>
-                                Sign In
-                            </h2>
+                            <ul>
+                                <li>S</li>
+                                <li>I</li>
+                                <li>G</li>
+                                <li>N</li>
+                                <li>I</li>
+                                <li>N</li>
+                            </ul>
                             <input type="text" name="" placeholder="Username" />
                             <input type="password" name="" placeholder="Password" />
                             <input type="submit" name="" value="login" />
+                           
                             <p className="signup">Don't have an account ? <span onClick={()=>ToggleCss()}>Sign Up</span></p>
                         </form>
                     </div>
@@ -32,9 +38,14 @@ const Auth = () => {
                     
                     <div className="formBx">
                         <form>
-                            <h2>
-                                Create an account
-                            </h2>
+                            <ul>
+                                <li>S</li>
+                                <li>I</li>
+                                <li>G</li>
+                                <li>N</li>
+                                <li>U</li>
+                                <li>P</li>
+                            </ul>
                             <input type="text" name="" placeholder="Username" />
                             <input type="email" name="" placeholder="Email Address" />
                             <input type="password" name="" placeholder="Password" />
