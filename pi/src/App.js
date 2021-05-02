@@ -1,6 +1,6 @@
 
 import './App.css';
-import {SinglePlayer,MultiPlayer,LandingPage,Home,Test} from './Pages'
+import {SinglePlayer,MultiPlayer,LandingPage,Home,Test,AuthScreen} from './Pages'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 
 import * as PIXI from 'pixi.js'
@@ -26,7 +26,10 @@ function App() {
           <Route path="/single-player"><SinglePlayer app={app} /></Route>
         </Switch>
         <Switch>
-          <Route path="/multi-player"><MultiPlayer app={app} /></Route>
+          <Route path="/multi-player"><MultiPlayer /></Route>
+        </Switch>
+        <Switch>
+          <Route path="/auth"><AuthScreen /></Route>
         </Switch>
         <Switch>
           <Route path="/testing"><Test app={app} /></Route>
