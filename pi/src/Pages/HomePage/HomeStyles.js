@@ -130,7 +130,7 @@ header .logo
 }
 .text a
 {
-  width: 300px;
+  width: 350px;
   text-align: center;
  position:relative;
  display: inline-block;
@@ -148,7 +148,7 @@ header .logo
 }
 .text a:hover
 {
-  letter-spacing: 6px;
+  letter-spacing: 5px;
   color:#050801;
   background-color:${neonlightblue};
   box-shadow: 0 0 5px ${neonlightblue},
