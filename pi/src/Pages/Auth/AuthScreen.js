@@ -9,8 +9,10 @@ const Auth = () => {
     const ToggleCss=()=>{
         setActive(!active);
     }
+    const sectionCss = activeCss ? 'primaryBg': 'secondaryBg'
+    console.log(`${activeCss}section`)
     return (
-        <AuthContainer>
+        <AuthContainer className={`${sectionCss}`}>
             <div className={`container ${activeCss}`}>
                 <div className="user siginBx">
                     <div className="imgBx">
@@ -38,7 +40,7 @@ const Auth = () => {
                     
                     <div className="formBx">
                         <form>
-                            <ul>
+                            <ul className="active">
                                 <li>S</li>
                                 <li>I</li>
                                 <li>G</li>

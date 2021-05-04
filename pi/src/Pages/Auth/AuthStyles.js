@@ -52,6 +52,56 @@ const animate=keyframes`
   
 }
 `;
+
+const animate1=keyframes`
+  0%{
+    color:#484848;
+    text-shadow:none;
+  }
+  18%{
+    color:#484848;
+    text-shadow:none;
+  }
+  20%{
+    color:#E23441;
+    text-shadow:0 0 7px #E23441 , 0 0 20px #ff6c00;
+  }
+  30%{
+    color:#484848;
+    text-shadow:none;
+  }
+  35%{
+    color:#E23441;
+    text-shadow:0 0 7px #E23441 , 0 0 20px #ff6c00;
+  }
+  50%{
+    color:#484848;
+    text-shadow:none;
+  }
+  55%{
+    color:#E23441;
+    text-shadow:0 0 7px #E23441 , 0 0 20px #ff6c00;
+  }
+  70%{
+    color:#484848;
+    text-shadow:none;
+  }
+  
+  85%{
+    color:#E23441;
+    text-shadow:0 0 7px #E23441 , 0 0 20px #ff6c00;
+  }
+  90%{
+    color:#484848;
+    text-shadow:none;
+  }
+  }
+  100%{
+    color:#484848;
+    text-shadow:none;
+  }
+}
+`;
 export const AuthContainer=styled.section`
     position: relative;
     min-height: 100vh;
@@ -60,6 +110,7 @@ export const AuthContainer=styled.section`
     justify-content:center;
     align-items:center;
     padding:20px;
+    
     .container.active{
         .signupBx{
             pointer-events: initial;
@@ -138,6 +189,25 @@ export const AuthContainer=styled.section`
                             color:#484848;
                             text-shadow:none;
                             animation: ${animate} 2s infinite linear;
+                        }
+                    }
+                    .active{
+                      position:relative;
+                        margin:0;
+                        padding:0;
+                        display:flex;
+                        flex-direction:row;
+                        align-items: center;
+                        justify-content:center;
+                        margin-bottom:10px;
+                        li{
+                            list-style:none;
+                            font-family:Poppin;
+                            font-size:2em;
+                            letter-spacing:15px;
+                            color:#484848;
+                            text-shadow:none;
+                            animation: ${animate1} 2s infinite linear !important;
                         }
                     }
                     h2{
