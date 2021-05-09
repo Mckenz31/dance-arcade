@@ -1,14 +1,38 @@
-import React,{useState} from 'react'
+// import React,{useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import Image1 from '../../images/img1.jpg'
 import Image2 from '../../images/img2.jpg'
 import {AuthContainer} from './AuthStyles'
+
+firebase.initializeApp({
+  apiKey: "AIzaSyC-dDKOX68D9Eo-5qz0GPkAwFDLbpEwcN4",
+  authDomain: "dance-arcade-development.firebaseapp.com",
+  projectId: "dance-arcade-development",
+  storageBucket: "dance-arcade-development.appspot.com",
+  messagingSenderId: "198019606179",
+  appId: "1:198019606179:web:ffc4930e040ca92da78116"
+
+});
+
+const auth = firebase.auth();
+// const firestore = firebase.firestore();
+
 const Auth = () => {
+    const signInWithGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider);
+      }
     const [active,setActive]=useState('')
     const activeCss= active ? 'active' : '';
     console.log(activeCss,active)
     const ToggleCss=()=>{
         setActive(!active);
     }
+    const [user] = useAuthState(auth);
     return (
         <AuthContainer>
             <div className={`container ${activeCss}`}>
@@ -29,6 +53,8 @@ const Auth = () => {
                             <input type="text" name="" placeholder="Username" />
                             <input type="password" name="" placeholder="Password" />
                             <input type="submit" name="" value="login" />
+                            <div class="separator">OR</div>
+                            <button type="button" onClick={()=>signInWithGoogle()}>Google Auth</button>
                            
                             <p className="signup">Don't have an account ? <span onClick={()=>ToggleCss()}>Sign Up</span></p>
                         </form>
@@ -61,6 +87,26 @@ const Auth = () => {
             </div>
         </AuthContainer>
     )
+}
+
+
+function SignIn() {
+
+    const signInWithGoogle = () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider);
+    }
+  
+    // return (
+    //     <button onClick={signInWithGoogle}>Sign in with Google</button>
+    // )
+  
+  }
+
+function SignOut() {
+  return auth.currentUser && (
+    <button onClick={() => auth.signOut()}>Sign Out</button>
+  )
 }
 
 export default Auth

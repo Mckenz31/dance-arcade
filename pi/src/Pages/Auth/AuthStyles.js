@@ -175,7 +175,38 @@ export const AuthContainer=styled.section`
                         letter-spacing:1px;
                         transition: 0.5s;
                     }
+                    button{
+                      width: 100%;
+                      height: 40px;
+                      background: #a10050;
+                      outline: none;
+                      border: none;
+                      color: #fff;
+                      font-weight: 500;
+                      letter-spacing:1px;
+                      font-size: 14px;
+                      cursor: pointer;
+                    }
+                    .separator {
+                      color: #fff;
+                      display: flex;
+                      align-items: center;
+                      text-align: center;
+                    }
                     
+                    .separator::before,
+                    .separator::after {
+                      content: '';
+                      flex: 1;
+                      border-bottom: 1px solid #FFF;
+                    }
+                    .separator:not(:empty)::before {
+                      margin-right: .25em;
+                    }
+                    
+                    .separator:not(:empty)::after {
+                      margin-left: .25em;
+                    }
                     .signup{
                         position: relative;
                         margin-top: 20px;

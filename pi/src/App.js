@@ -1,4 +1,3 @@
-
 import './App.css';
 import {SinglePlayer,MultiPlayer,LandingPage,Home,Test,AuthScreen} from './Pages'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
