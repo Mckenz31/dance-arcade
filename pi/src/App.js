@@ -2,8 +2,9 @@
 import './App.css';
 import {SinglePlayer,MultiPlayer,LandingPage,Home,Test,AuthScreen} from './Pages'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-
+import {AuthProvider} from './Components/context/AuthProvider'
 import * as PIXI from 'pixi.js'
+import PrivateRoute from './Components/private-route/PrivateRoute'
 
 function App() {
   const app=new PIXI.Application({
@@ -11,32 +12,27 @@ function App() {
     height:window.innerHeight,
     transparent:true
   })
-
-  console.log(app)
   return (
-    <div >
+    <AuthProvider >
       <Router>
         <Switch>
           <Route exact component={LandingPage} path="/"/>
         </Switch>
         <Switch>
-          <Route path="/Home"><Home/></Route>
+          <Route path="/Home" component={Home}/>
         </Switch>
         <Switch>
-          <Route path="/single-player"><SinglePlayer app={app} /></Route>
+          <Route path="/single-player" render={(props) => <SinglePlayer app={app} {...props} />}  />
         </Switch>
         <Switch>
-          <Route path="/multi-player"><MultiPlayer /></Route>
+          <Route path="/multi-player" render={(props) => <MultiPlayer {...props} />}/>
         </Switch>
         <Switch>
           <Route path="/auth"><AuthScreen /></Route>
         </Switch>
-        <Switch>
-          <Route path="/testing"><Test app={app} /></Route>
-        </Switch>
       </Router>
        
-    </div>
+    </AuthProvider>
   );
 }
 

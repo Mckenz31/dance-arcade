@@ -45,7 +45,6 @@ const Game = ({ app }) => {
       {one:false, two:false, three:false, four:true},
       {one:false, two:true, three:false, four:false},
     ]);
-    console.log(data.data);
   };
 
   const bgm = useRef(new Audio(BGM));
@@ -115,12 +114,10 @@ const Game = ({ app }) => {
     myVar.current = setInterval(function () {
       if (counter === limit) {
         clearInterval(myVar.current);
-        console.log("cleared");
       }
       let key = Object.keys(data[counter]).find(
         (k) => data[counter][k] === true
       );
-      console.log(key);
       switch (key) {
         case "one":
           PlayLeftArrow();
@@ -135,7 +132,6 @@ const Game = ({ app }) => {
           PlayDownArrow();
           break;
         default:
-          console.log('nothing')
           break;
       }
       counter++;

@@ -23,22 +23,18 @@ var stepPressed;
 
 buttons.on('pressed', pin => {
   if(pin == 26){
-    // console.log(`User pressed button ${pin}. - LEFT ARROW` );
     console.log("Pressed - one");
     stepPressed = "one";
   }
   else if(pin == 19){
-    // console.log("`User pressed button ${pin}. - TOP ARROW`");
     console.log("Pressed - two");
     stepPressed = "two";
   }
   else if(pin == 13){
-    // console.log(`User pressed button ${pin}. - RIGHT ARROW`);
     console.log("Pressed - three");
     stepPressed = "three";
   }
   else if(pin == 6){
-    // console.log(`User pressed button ${pin}. BOTTOM ARROW` );
     console.log("Peessed - four");
     stepPressed = "four";
   }
@@ -80,7 +76,6 @@ function waiting(){
 
 function checking(){
     obj = post[i];
-    // console.log(obj);
     for(var key in obj){
       if(obj[key] == true){
         console.log("Solution: " +key);
