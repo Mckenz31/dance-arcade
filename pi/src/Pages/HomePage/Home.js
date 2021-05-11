@@ -3,33 +3,58 @@ import BGM from '../../video/bgm.mp3'
 import BgVideo from '../../video/bgvideo.mp4';
 import './HomeStyles.js'
 import {HomeContainer} from './HomeStyles'
+import {useAuth} from '../../Components/context/AuthProvider'
+import {Toast} from 'react-bootstrap';
 
 const Home = () => {
     
     const bgm=useRef(new Audio(BGM))
-    const [showAboutUs,setShowAboutUs]=useState(false)
+    const [showAboutUs,setShowAboutUs]=useState(false);
+    const [error,setError]=useState("");
+    const [showToast,setShowToast]=useState(false);
+    const { LogOut,currentUser }=useAuth();
+
     useEffect(()=>{
         bgm.current.play();
     },[])
-    
+
+    const handleLogout=async()=>{
+      setError("")
+      try{
+        await LogOut();
+      }catch{
+        setError("Failed to logout")
+      }
+    }
+
+    console.log(currentUser,"current user")
+    const toggleShow = () => setShowToast(!showToast);
     return (
         <HomeContainer className="showcase">
-           <section class="showcase">
+           <section className="showcase">
     <header>
-      <h2 class="logo">Dance dance revolution</h2>
+      <h2 className="logo">Dance dance revolution</h2>
+      
+      <button onClick={handleLogout} >Logout</button>
     </header>
     <video className="video" autoPlay loop muted>
       <source src={BgVideo} type="video/mp4"/>
     </video>
     
         
-    <div class="overlay"></div>
+    <div className="overlay"></div>
     <div classname="centered" style={{margin:'auto'}}>
 
       
       { !showAboutUs ? (
-      <div class="text">
-
+      <div className="text">
+      {error &&  <Toast show={showToast} onClose={toggleShow}>
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Error Message</strong>
+        </Toast.Header>
+        <Toast.Body>{error}</Toast.Body>
+      </Toast>}
       <div>
           <a href="/single-player">
           <span></span>
@@ -85,7 +110,7 @@ const Home = () => {
       
       
     </div>
-    <ul class="social">
+    <ul className="social">
       <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"/></a></li>
       <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"/></a></li>
       <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"/></a></li>
