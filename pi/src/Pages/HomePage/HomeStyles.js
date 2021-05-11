@@ -50,12 +50,22 @@ header
   display: flex;
   justify-content: space-between;
   align-items: center;
+  button{
+    background:transparent;
+    outline:none;
+    border:none;
+    color:#fff;
+    font-size: 20px;
+    cursor:pointer;
+    font-weight:600;
+  }
 }
 header .logo
 {
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
+  
 }
 .toggle
 {

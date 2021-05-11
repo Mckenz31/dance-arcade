@@ -165,8 +165,11 @@ export const AuthContainer=styled.section`
                         font-weight:300;
                     
                     }
-                    input[type="submit"]{
-    
+                    button{
+                      width:100%;
+                      padding:10px;
+                      border: none;
+                      outline: none;
                         background:#677eff;
                         color: #fff;
                         cursor: pointer;
