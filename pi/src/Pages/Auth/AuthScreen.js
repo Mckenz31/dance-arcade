@@ -11,17 +11,6 @@ import {useAuth} from '../../Components/context/AuthProvider'
 import {useHistory} from 'react-router-dom'
 import {Alert} from 'react-bootstrap'
 
-firebase.initializeApp({
-  apiKey: "AIzaSyC-dDKOX68D9Eo-5qz0GPkAwFDLbpEwcN4",
-  authDomain: "dance-arcade-development.firebaseapp.com",
-  projectId: "dance-arcade-development",
-  storageBucket: "dance-arcade-development.appspot.com",
-  messagingSenderId: "198019606179",
-  appId: "1:198019606179:web:ffc4930e040ca92da78116"
-
-});
-
-const auth = firebase.auth();
 // const firestore = firebase.firestore();
 
 const Auth = () => {
