@@ -1,15 +1,28 @@
-import React,{useState,useRef,useEffect} from 'react'
+// import React,{useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import Image1 from '../../images/img1.jpg'
 import Image2 from '../../images/img2.jpg'
 import {AuthContainer} from './AuthStyles'
 import {useAuth} from '../../Components/context/AuthProvider'
 import {useHistory} from 'react-router-dom'
 import {Alert} from 'react-bootstrap'
+
+// const firestore = firebase.firestore();
+
 const Auth = () => {
-    const [active,setActive]=useState('');
+    const signInWithGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider);
+      }
+    const [active,setActive]=useState('')
     const [error,setError]=useState('');
     const [loading,setLoading]=useState(false);
     const History = useHistory();
+
     const activeCss= active ? 'active' : '';
     const { SignUp , currentUser,Login,LogOut,DatabaseListener }=useAuth();
 
@@ -57,6 +70,7 @@ const Auth = () => {
     const ToggleCss=()=>{
         setActive(!active);
     }
+    const [user] = useAuthState(auth);
 
     return (
         <AuthContainer>
@@ -78,6 +92,9 @@ const Auth = () => {
                             <input type="email" ref={Login_emailRef} name="" placeholder="Username" />
                             <input type="password" ref={Login_passwordRef} name="" placeholder="Password" />
                             <input type="submit" name="" value="login" />
+                            <div class="separator">OR</div>
+                            <button type="button" onClick={()=>signInWithGoogle()}>Google Auth</button>
+                          
                             <p className="signup">Don't have an account ? <span onClick={()=>ToggleCss()}>Sign Up</span></p>
                         </form>
                     </div>
@@ -112,6 +129,26 @@ const Auth = () => {
             </div>
         </AuthContainer>
     )
+}
+
+
+function SignIn() {
+
+    const signInWithGoogle = () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider);
+    }
+  
+    // return (
+    //     <button onClick={signInWithGoogle}>Sign in with Google</button>
+    // )
+  
+  }
+
+function SignOut() {
+  return auth.currentUser && (
+    <button onClick={() => auth.signOut()}>Sign Out</button>
+  )
 }
 
 export default Auth
