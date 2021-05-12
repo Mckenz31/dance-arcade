@@ -1,6 +1,6 @@
 import React,{useContext,createContext,useState,useEffect} from 'react'
 import { Auth,DB } from '../Firebase/firebase';
-
+import firebase from 'firebase';
 const AuthContext = createContext();
 
 export function useAuth (){
@@ -37,7 +37,10 @@ export function AuthProvider ({children}) {
       function updatePassword(password) {
         return currentUser.updatePassword(password)
       }
-    
+      const signInWithGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        Auth.signInWithPopup(provider);
+      }
     useEffect(()=>{
         const unsubscribe = Auth.onAuthStateChanged(user=>{
             setLoading(false)
@@ -54,7 +57,8 @@ export function AuthProvider ({children}) {
         resetPassword,
         updateEmail,
         updatePassword,
-        DatabaseListener
+        DatabaseListener,
+        signInWithGoogle
     }
     
     return (
