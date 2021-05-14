@@ -3,8 +3,9 @@ import BGM from '../../video/bgm.mp3'
 import BgVideo from '../../video/bgvideo.mp4';
 import './HomeStyles.js'
 import {HomeContainer} from './HomeStyles'
-import {useAuth} from '../../Components/context/AuthProvider'
+import {useAuth} from '../../Components/contexts/AuthContext'
 import {Toast} from 'react-bootstrap';
+import {  useHistory } from "react-router-dom"
 
 const Home = () => {
     
@@ -12,23 +13,26 @@ const Home = () => {
     const [showAboutUs,setShowAboutUs]=useState(false);
     const [error,setError]=useState("");
     const [showToast,setShowToast]=useState(false);
-    const { LogOut,currentUser }=useAuth();
+    const { logout }=useAuth();
+    const history = useHistory()
 
     useEffect(()=>{
         bgm.current.play();
     },[])
 
-    const handleLogout=async()=>{
+    async function handleLogout() {
       setError("")
-      try{
-        await LogOut();
-      }catch{
-        setError("Failed to logout")
+  
+      try {
+        await logout()
+        history.push("/auth")
+      } catch {
+        setError("Failed to log out")
       }
     }
-
-    console.log(currentUser,"current user")
+    
     const toggleShow = () => setShowToast(!showToast);
+
     return (
         <HomeContainer className="showcase">
            <section className="showcase">
@@ -43,7 +47,7 @@ const Home = () => {
     
         
     <div className="overlay"></div>
-    <div classname="centered" style={{margin:'auto'}}>
+    <div className="centered" style={{margin:'auto'}}>
 
       
       { !showAboutUs ? (

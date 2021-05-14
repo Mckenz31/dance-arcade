@@ -55,7 +55,6 @@ const animate=keyframes`
 export const AuthContainer=styled.section`
     position: relative;
     min-height: 100vh;
-    background:#fee648;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -75,7 +74,6 @@ export const AuthContainer=styled.section`
         position: relative;
         width: 800px;
         height:500px;
-        background:#fff;
         box-shadow: 0 15px 50px rgba(0,0,0,0.1);
         overflow: hidden;
         .signupBx{
@@ -159,13 +157,13 @@ export const AuthContainer=styled.section`
                         border: none;
                         outline: none;
                         box-shadow: none;
-                        margin: 8px 0px;
+                        margin: 9px 0px;
                         font-size:14px;
                         letter-spacing:1px;
                         font-weight:300;
                     
                     }
-                    button{
+                    input[type="submit"] {
                       width:100%;
                       padding:10px;
                       border: none;
@@ -181,10 +179,11 @@ export const AuthContainer=styled.section`
                     button{
                       width: 100%;
                       height: 40px;
-                      background: #a10050;
+                      margin-top:7px;
+                      background: #fff;
                       outline: none;
                       border: none;
-                      color: #fff;
+                      color: #000;
                       font-weight: 500;
                       letter-spacing:1px;
                       font-size: 14px;
@@ -210,7 +209,7 @@ export const AuthContainer=styled.section`
                     .separator:not(:empty)::after {
                       margin-left: .25em;
                     }
-                    .signup{
+                    .reg{
                         position: relative;
                         margin-top: 20px;
                         font-size: 12px;
