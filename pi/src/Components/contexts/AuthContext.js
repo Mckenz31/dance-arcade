@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
     history.push("/Home")
   }
   const DatabaseListener=()=>{
-    db.collection("Player1").onSnapshot(snap=>{
+    db.collection("users").onSnapshot(snap=>{
         console.log(snap.docs.map(doc =>doc.data()))
     })
   }

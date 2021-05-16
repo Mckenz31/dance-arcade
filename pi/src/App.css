@@ -4,3 +4,12 @@
 .signin{
     background-color: #fee648 !important;
 }
+.offcanvas {
+    background-color: lightgrey;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}

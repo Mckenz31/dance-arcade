@@ -8,20 +8,19 @@ import Image2 from '../../images/img2.jpg'
 import {AuthContainer} from './AuthStyles'
 import {useAuth} from '../../Components/contexts/AuthContext'
 import {useHistory} from 'react-router-dom'
-import {Alert} from 'react-bootstrap'
-
+import { message } from 'antd';
+import ProfilePicker from '../../Components/profile-picker/ProfilePicker';
 // const firestore = firebase.firestore();
 
 const Auth = () => {
     
     const [active,setActive]=useState('')
-    const [error,setError]=useState('');
     const [loading,setLoading]=useState(false);
     const history = useHistory();
 
     const activeCss= active ? 'active' : '';
     const bgColorCss = active ? 'signup' : 'signin'
-    const { signup , currentUser,login,LogOut,signInWithGoogle }=useAuth();
+    const { signup , currentUser,login,signInWithGoogle }=useAuth();
 
     // signUp refs
     const SignUp_emailRef=useRef(); 
@@ -40,16 +39,15 @@ const Auth = () => {
         e.preventDefault()
     
         if (SignUp_passwordRef.current.value !== SignUp_confirmPasswordRef.current.value) {
-          return setError("Passwords do not match")
+          return warning("Passwords do not match")
         }
     
         try {
-          setError("")
           setLoading(true)
           await signup(SignUp_emailRef.current.value, SignUp_passwordRef.current.value)
           history.push("/Home")
         } catch {
-          setError("Failed to create an account")
+            warning("Failed to create an account")
         }
     
         setLoading(false)
@@ -59,25 +57,27 @@ const Auth = () => {
         e.preventDefault()
     
         try {
-          setError("")
           setLoading(true)
           await login(Login_emailRef.current.value, Login_passwordRef.current.value)
           history.push("/Home")
         } catch {
-          setError("Failed to log in")
+            warning("Failed to log in")
         }
     
         setLoading(false)
       }
 
     const ToggleCss=()=>{
-        setError("")
         setActive(!active);
     }
     
     const HandleGoogleSignIn=()=>{
         signInWithGoogle();
     }
+    const warning = (mess) => {
+        message.warning(mess,3);
+    };
+
     return (
         <AuthContainer className={`${bgColorCss}`}>
             <div className={`container ${activeCss}`}>
@@ -95,11 +95,11 @@ const Auth = () => {
                                 <li>I</li>
                                 <li>N</li>
                             </ul>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            <input type="email" ref={Login_emailRef} name="" placeholder="Username" />
-                            <input type="password" ref={Login_passwordRef} name="" placeholder="Password" />
+                            {/* {error && <Alert variant="danger">{error}</Alert>} */}
+                            <input type="email" required ref={Login_emailRef} name="" placeholder="Enter Email Address" />
+                            <input type="password" required ref={Login_passwordRef} name="" placeholder="Enter Password" />
                             <input type="submit" name="" value="login" />
-                            <div class="separator">OR</div>
+                            <div className="separator">OR</div>
                             <button type="button" onClick={()=>HandleGoogleSignIn()}> <GoogleIcon/> &nbsp;  Continue with Google</button>
                             <p className="reg">Don't have an account ? <span onClick={()=>ToggleCss()}>Sign Up</span></p>
                         </form>
@@ -118,10 +118,13 @@ const Auth = () => {
                                 <li>P</li>
                             </ul>
                             {currentUser && currentUser.email}
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            <input type="email" ref={SignUp_emailRef}  placeholder="Email Address" />
-                            <input type="password" ref={SignUp_passwordRef}  placeholder="Password" />
-                            <input type="password" ref={SignUp_confirmPasswordRef} placeholder="Confirm Password" />
+                            {/* {error && <Alert variant="danger">{error}</Alert>} */}
+                            
+                            <ProfilePicker/>
+                            <input type="text" required ref={SignUp_emailRef}  placeholder="Enter Username" />
+                            <input type="email" required ref={SignUp_emailRef}  placeholder="Enter Email Address" />
+                            <input type="password" required ref={SignUp_passwordRef}  placeholder="Enter Password" />
+                            <input type="password" required ref={SignUp_confirmPasswordRef} placeholder="Enter Confirm Password" />
                             <input type="submit" name="" disabled={loading} value="login" />
                             <p className="reg">Already have an account ? <span onClick={()=>ToggleCss()}>Sign in</span></p>
                         </form>
