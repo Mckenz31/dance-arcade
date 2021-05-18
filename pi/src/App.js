@@ -1,7 +1,8 @@
 import './App.css';
-import {SinglePlayer,MultiPlayer,LandingPage,Home,Test,AuthScreen} from './Pages'
+import React from 'react'
+import {SinglePlayer,MultiPlayer,LandingPage,Home,AuthScreen} from './Pages'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-import {AuthProvider} from './Components/context/AuthProvider'
+import {AuthProvider} from './Components/contexts/AuthContext'
 import * as PIXI from 'pixi.js'
 import PrivateRoute from './Components/private-route/PrivateRoute'
 
@@ -12,26 +13,21 @@ function App() {
     transparent:true
   })
   return (
-    <AuthProvider >
-      <Router>
-        <Switch>
-          <Route exact component={LandingPage} path="/"/>
-        </Switch>
-        <Switch>
-          <Route path="/Home" component={Home}/>
-        </Switch>
-        <Switch>
-          <Route path="/single-player" render={(props) => <SinglePlayer app={app} {...props} />}  />
-        </Switch>
-        <Switch>
-          <Route path="/multi-player" render={(props) => <MultiPlayer {...props} />}/>
-        </Switch>
-        <Switch>
-          <Route path="/auth"><AuthScreen /></Route>
-        </Switch>
+    <Router>
+        <AuthProvider >
+          <Switch>
+              <Route exact component={LandingPage} path="/"/>
+            
+              <PrivateRoute path="/Home" component={Home}/>
+            
+              <Route path="/single-player" render={(props) => <SinglePlayer app={app} {...props} />}  />
+          
+              <Route path="/multi-player" render={(props) => <MultiPlayer {...props} />}/>
+            
+              <Route path="/auth" component={AuthScreen} />
+          </Switch>
+        </AuthProvider>
       </Router>
-       
-    </AuthProvider>
   );
 }
 
