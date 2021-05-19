@@ -78,7 +78,7 @@ const Home = () => {
             Multi Player</a>
         </div>
         <div>  
-          <a role="button">
+          <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
           <span></span>
           <span></span>
           <span></span>
