@@ -4,7 +4,7 @@ import {SinglePlayer,MultiPlayer,LandingPage,Home,AuthScreen, Test} from './Page
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import {AuthProvider} from './Components/contexts/AuthContext'
 import * as PIXI from 'pixi.js'
-import PrivateRoute from './Components/private-route/PrivateRoute'
+import { PrivateRoute, PublicRoute } from './Components/private-route/PrivateRoute'
 
 function App() {
   const app=new PIXI.Application({
@@ -12,6 +12,7 @@ function App() {
     height:window.innerHeight,
     transparent:true
   })
+
   return (
     <Router>
         <AuthProvider >
@@ -26,7 +27,7 @@ function App() {
 
               <Route path="/test" render={(props) => <Test {...props} />}/>
             
-              <Route path="/auth" component={AuthScreen} />
+              <PublicRoute path="/auth" component={AuthScreen} />
           </Switch>
         </AuthProvider>
       </Router>

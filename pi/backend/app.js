@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+const cors = require("cors");
 
 var i = 0;
 var chktimer;
@@ -19,22 +20,21 @@ let buttons = new RPiGPIOButtons({
   pins: [6, 13, 19, 26] // use any GPIO pins, 6,13,19,26 is what I have selected
 });
 
-var stepPressed;
 
 buttons.on('pressed', pin => {
-  if(pin == 26){
+  if(pin === 26){
     console.log("Pressed - one");
     stepPressed = "one";
   }
-  else if(pin == 19){
+  else if(pin === 19){
     console.log("Pressed - two");
     stepPressed = "two";
   }
-  else if(pin == 13){
+  else if(pin === 13){
     console.log("Pressed - three");
     stepPressed = "three";
   }
-  else if(pin == 6){
+  else if(pin === 6){
     console.log("Peessed - four");
     stepPressed = "four";
   }
@@ -77,9 +77,9 @@ function waiting(){
 function checking(){
     obj = post[i];
     for(var key in obj){
-      if(obj[key] == true){
+      if(obj[key] === true){
         console.log("Solution: " +key);
-        if(key == stepPressed){
+        if(key === stepPressed){
           console.log(true);
           console.log("True - " +stepPressed)
           score = score + 50;
@@ -94,7 +94,7 @@ function checking(){
     }
   i++;
   maxScore = maxScore+50;
-  if(i == post.length){
+  if(i === post.length){
     clearInterval(chktimer);
     console.log("GAME OVER")
     console.log("SCORE:", score, "/", maxScore)
@@ -102,13 +102,8 @@ function checking(){
   }
 }
 
-//Handles CORS issues
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"),
-  res.setHeader("Access-Control-Allow-Header", "Origin, XMLHttpRequest X-Requested-With, Content-Type, Accept"),
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS");
-  next();
-})
+// Automatically allow cross-origin requests
+app.use(cors({origin: "*",methods:["GET","POST"]}));
 
 //Api call which gets the posts and starts the game
 app.get('/steps', (req, res, next) => {

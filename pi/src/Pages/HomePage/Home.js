@@ -7,13 +7,14 @@ import {useAuth} from '../../Components/contexts/AuthContext'
 import {  useHistory } from "react-router-dom"
 import { message } from 'antd';
 import Sidebar from '../../Components/sidebar/Sidebar'
+import Navbar from '../../Components/Navbar/Navbar';
 
 const Home = () => {
-    
+   
     const bgm=useRef(new Audio(BGM))
     const [showAboutUs,setShowAboutUs]=useState(false);
     const [showToast,setShowToast]=useState(false);
-    const { logout, DatabaseListener }=useAuth();
+    const { logout }=useAuth();
     const history = useHistory()
 
     useEffect(()=>{
@@ -33,23 +34,18 @@ const Home = () => {
     const warning = (mess) => {
       message.warning(mess,3);
   };
-    useEffect(() => {
-      DatabaseListener()
-    },[])
+    
     const toggleShow = () => setShowToast(!showToast);
     
     return (
         <HomeContainer className="showcase">
+          <Navbar handleLogout={handleLogout}/>
           <Sidebar/>
       <section className="showcase">
       <audio autoPlay controls="controls" style={{display:"none"}}>
         <source src={BGM} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-    <header>
-      <h2 className="logo">Dance dance revolution</h2>
-      <button onClick={handleLogout} >Logout</button>
-    </header>
     <video className="video" autoPlay loop muted>
       <source src={BgVideo} type="video/mp4"/>
     </video>
@@ -63,36 +59,36 @@ const Home = () => {
       
       <div>
           <a href="/single-player">
+          {/* <span></span>
           <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-            Single Player</a>
+          <span></span> */}
+          <span>Single Player</span>
+            </a>
         </div>
       <div>
           <a href="/multi-player">
+          {/* <span></span>
           <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-            Multi Player</a>
+          <span></span> */}
+          <span>Multi Player</span>
+            </a>
         </div>
         <div>  
-          <a role="button">
+          <a  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          {/* <span></span>
           <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-            Friends</a>
+          <span></span> */}
+          <span>Friends</span>
+            </a>
         </div>
         <div>
           
           <a  onClick={()=>setShowAboutUs(!showAboutUs)}>
+          {/* <span></span>
           <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-            about us</a>
+          <span></span> */}
+          <span>about us</span>
+            </a>
       </div>
         </div>):(
           <div className="about">
