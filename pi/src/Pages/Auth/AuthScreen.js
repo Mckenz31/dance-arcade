@@ -125,7 +125,7 @@ const Auth = () => {
                             <input type="email" required ref={SignUp_emailRef}  placeholder="Enter Email Address" />
                             <input type="password" required ref={SignUp_passwordRef}  placeholder="Enter Password" />
                             <input type="password" required ref={SignUp_confirmPasswordRef} placeholder="Enter Confirm Password" />
-                            <input type="submit" name="" disabled={loading} value="login" />
+                            <input type="submit" name="" disabled={loading} value="Sign Up" />
                             <p className="reg">Already have an account ? <span onClick={()=>ToggleCss()}>Sign in</span></p>
                         </form>
                     </div>

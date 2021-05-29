@@ -138,77 +138,153 @@ header .logo
 .centered{
   margin: auto ;
 }
-.text a
-{
-  width: 350px;
-  text-align: center;
- position:relative;
- display: inline-block;
- padding:15px 30px;
- margin:20px 0;
- color: ${neonlightblue};
- font-size: 24px;
- text-decoration: none;
- text-transform: uppercase;
- transition:0.5s;
- letter-spacing:4px;
- cursor: pointer;
- overflow: hidden;
-  background-color: transparent;
+.text a {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid ${neonlightblue};
+  margin:20px;
+  background:transparent;
+  width:300px;
+  display:flex;
+  justify-content:center;
+  text-transform: uppercase;
+  font-weight:600;
+  text-decoration: none;
+  letter-spacing:2px;
+  color:#fff;
+  -webkit-box-reflect: below 0px linear-gradient (transparent, #0002);
+  transition: 0.5s;
 }
-.text a:hover
-{
-  letter-spacing: 5px;
-  color:#050801;
-  background-color:${neonlightblue};
-  box-shadow: 0 0 5px ${neonlightblue},
-              0 0 25px ${neonlightblue},
-              0 0 50px ${neonlightblue},
-              0 0 200px ${neonlightblue}
-  ;
+.text a:hover{
+  color: #000;
+  letter-spacing: 6px;
+  transition-delay:1.5s;
+  box-shadow: 0 0 2px ${neonlightblue},
+              0 0 4px ${neonlightblue},
+              0 0 6px ${neonlightblue},
+              0 0 8px ${neonlightblue};
+              
+}
+.text a::before{
+  content: '';
+  position: absolute;
+  left:-20px;
+  top:50%;
+  transform: translateY(-50%);
+  width:20px;
+  height:2px;
+  background:${neonlightblue};
+  box-shadow: 5px -8px 0 ${neonlightblue},
+              5px 8px 0 ${neonlightblue};
+  transition: width 0.5s , left 0.5s, height 0.5s, box-shadow 0.5s;
+  transition-delay: 1s , 0.5s, 0s , 0s;
+}
+.text a:hover::before{
+  width:60%;
+  height:100%;
+  left:-2px;
+  box-shadow: 5px 0 0 ${neonlightblue},
+              5px 0 0 ${neonlightblue};
+  transition-delay: 0s , 0.5s , 1s,1s ;
+}
+.text a::after{
+  content: '';
+  position: absolute;
+  right:-20px;
+  top:50%;
+  transform: translateY(-50%);
+  width:20px;
+  height:2px;
+  background:${neonlightblue};
+  box-shadow: -5px -8px 0 ${neonlightblue},
+              -5px 8px 0 ${neonlightblue};
+  transition: width 0.5s , left 0.5s, height 0.5s, box-shadow 0.5s;
+  transition-delay: 1s , 0.5s, 0s , 0s;
 }
 .text a span{
-  position: absolute;
-  display: block;
+  position:relative;
+  z-index:1000;
 }
-a span:nth-child(1){
-  top: 0;
-  left: -100%;
-  width:100%;
-  height: 2px;
-  background: linear-gradient(90deg,transparent,${neonlightblue});
-  animation: ${animate1} 1s linear infinite;
+.text a:hover::after{
+  width:60%;
+  height:100%;
+  right:-2px;
+  box-shadow: -5px 0 0 ${neonlightblue},
+              -5px 0 0 ${neonlightblue};
+  transition-delay: 0s , 0.5s , 1s,1s ;
 }
+// .text a
+// {
+//   width: 350px;
+//   text-align: center;
+//  position:relative;
+//  display: inline-block;
+//  padding:15px 30px;
+//  margin:20px 0;
+//  color: white;
+//  font-size: 24px;
+//  text-decoration: none;
+//  text-transform: uppercase;
+//  transition:0.5s;
+//  letter-spacing:4px;
+//  cursor: pointer;
+//  overflow: hidden;
+//   background-color: transparent;
+// }
+// .text a:hover
+// {
+//   letter-spacing: 5px;
+//   color:#050801;
+//   background-color:${neonlightblue};
+//   box-shadow: 0 0 2px ${neonlightblue},
+//               0 0 4px ${neonlightblue},
+//               0 0 6px ${neonlightblue},
+//               0 0 8px ${neonlightblue}
+//   ;
+// }
+// .text a span{
+//   position: absolute;
+//   display: block;
+// }
+// a span:nth-child(1){
+//   top: 0;
+//   left: -100%;
+//   width:100%;
+//   height: 2px;
+//   background: linear-gradient(90deg,transparent,${neonlightblue});
+//   animation: ${animate1} 1s linear infinite;
+// }
 
-a span:nth-child(2){
-  top: -100%;
-  right: 0;
-  width:2px;
-  height: 100%;
-  background: linear-gradient(180deg,transparent,${neonlightblue});
-  animation: ${animate2} 1s linear infinite;
-  animation-delay:0.25s;
-}
+// a span:nth-child(2){
+//   top: -100%;
+//   right: 0;
+//   width:2px;
+//   height: 100%;
+//   background: linear-gradient(180deg,transparent,${neonlightblue});
+//   animation: ${animate2} 1s linear infinite;
+//   animation-delay:0.25s;
+// }
 
-a span:nth-child(3){
-  bottom: 0;
-  right: -100%;
-  width:100%;
-  height: 2px;
-  background: linear-gradient(270deg,transparent,${neonlightblue});
-  animation: ${animate3} 1s linear infinite;
-  animation-delay:0.5s;
-}
+// a span:nth-child(3){
+//   bottom: 0;
+//   right: -100%;
+//   width:100%;
+//   height: 2px;
+//   background: linear-gradient(270deg,transparent,${neonlightblue});
+//   animation: ${animate3} 1s linear infinite;
+//   animation-delay:0.5s;
+// }
 
-a span:nth-child(4){
-  bottom: -100%;
-  left: 0;
-  width:2px;
-  height: 100%;
-  background: linear-gradient(360deg,transparent,${neonlightblue});
-  animation: ${animate4} 1s linear infinite;
-  animation-delay:0.75s;
-}
+// a span:nth-child(4){
+//   bottom: -100%;
+//   left: 0;
+//   width:2px;
+//   height: 100%;
+//   background: linear-gradient(360deg,transparent,${neonlightblue});
+//   animation: ${animate4} 1s linear infinite;
+//   animation-delay:0.75s;
+// }
 
 .social
 {
