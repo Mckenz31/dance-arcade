@@ -40,7 +40,7 @@ export const NavbarContainer = styled.header`
   }
 
   .brand {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     transform: translateX(-100rem);
     animation: ${slideIn} 0.5s forwards;

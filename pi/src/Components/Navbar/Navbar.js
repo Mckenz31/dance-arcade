@@ -5,7 +5,7 @@ const Navbar = ({ handleLogout, toggleAbout }) => {
     <NavbarContainer>
       <div className="container">
         <nav>
-          <h4 className="brand">Dance Dance Arcade</h4>
+          <span className="brand">Dance Dance Arcade</span>
           <ul>
             <li>
               <span href="#">Home</span>

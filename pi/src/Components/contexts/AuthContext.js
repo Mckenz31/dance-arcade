@@ -12,8 +12,9 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   // const [currentUser, setCurrentUser] = useState()
-  // const [loading, setLoading] = useState(true)
-  const loading = useSelector((state) => state.user.loading);
+  const [loading, setLoading] = useState(true)
+  // const loading = useSelector((state) => state.user.loading);
+  const [currentUser, setCurrentUser] = useState()
   // const currentUser = useSelector(state => state.user.userInfo)
 
   // const history = useHistory();
@@ -51,6 +52,14 @@ export function AuthProvider({ children }) {
   //       console.log(snap.docs.map(doc =>doc.data()))
   //   })
   // }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user)
+      setLoading(false)
+    })
+
+    return unsubscribe
+  }, [])
 
   useEffect(() => {
     window.addEventListener('load', () => {
@@ -59,7 +68,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
-    // currentUser,
+    currentUser,
     // login,
     // signup,
     // logout,
