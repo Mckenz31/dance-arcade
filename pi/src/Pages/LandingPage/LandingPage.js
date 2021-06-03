@@ -23,12 +23,12 @@ const LandingPage = () => {
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
       consequat.</p>
-      <a ><Link to="/Home">Enter the game</Link></a>
+      <Link to="/Home">Enter the game</Link>
     </div>
     <ul className="social">
-      <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"/></a></li>
-      <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"/></a></li>
-      <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"/></a></li>
+      <li><span><img src="https://i.ibb.co/x7P24fL/facebook.png" alt="fb"/></span></li>
+      <li><span><img src="https://i.ibb.co/Wnxq2Nq/twitter.png" alt="tw"/></span></li>
+      <li><span><img src="https://i.ibb.co/ySwtH4B/instagram.png" alt="ig"/></span></li>
     </ul>
   </section>
         </div>

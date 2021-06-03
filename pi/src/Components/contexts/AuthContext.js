@@ -1,76 +1,78 @@
-import React, { useContext, useState, useEffect } from "react"
-import { auth, db } from "../Firebase/firebase"
+import React, { useContext, useState, useEffect } from 'react';
+import { auth, db } from '../Firebase/firebase';
 import firebase from 'firebase';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const AuthContext = React.createContext()
+const AuthContext = React.createContext();
 
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(true)
-    const history = useHistory();
+  // const [currentUser, setCurrentUser] = useState()
+  // const [loading, setLoading] = useState(true)
+  const loading = useSelector((state) => state.user.loading);
+  // const currentUser = useSelector(state => state.user.userInfo)
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
-  }
+  // const history = useHistory();
 
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
-  }
+  // function signup(email, password) {
+  //   return auth.createUserWithEmailAndPassword(email, password)
+  // }
 
-  function logout() {
-    return auth.signOut()
-  }
+  // function login(email, password) {
+  //   return auth.signInWithEmailAndPassword(email, password)
+  // }
 
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
-  }
+  // function logout() {
+  //   return auth.signOut()
+  // }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email)
-  }
+  // function resetPassword(email) {
+  //   return auth.sendPasswordResetEmail(email)
+  // }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password)
-  }
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    console.log(auth.signInWithPopup(provider));
-    history.push("/Home")
-  }
-  const DatabaseListener=()=>{
-    db.collection("users").onSnapshot(snap=>{
-        console.log(snap.docs.map(doc =>doc.data()))
-    })
-  }
+  // function updateEmail(email) {
+  //   return currentUser.updateEmail(email)
+  // }
+
+  // function updatePassword(password) {
+  //   return currentUser.updatePassword(password)
+  // }
+  // const signInWithGoogle = () => {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   auth.signInWithPopup(provider);
+  //   history.push("/Home")
+  // }
+  // const DatabaseListener=()=>{
+  //   db.collection("users").onSnapshot(snap=>{
+  //       console.log(snap.docs.map(doc =>doc.data()))
+  //   })
+  // }
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
-      setLoading(false)
-    })
-
-    return unsubscribe
-  }, [])
+    window.addEventListener('load', () => {
+      // console.log(navigator.onLine,"online or offline"); // this should be uploaded to db
+    });
+  }, []);
 
   const value = {
-    currentUser,
-    login,
-    signup,
-    logout,
-    resetPassword,
-    updateEmail,
-    signInWithGoogle,
-    updatePassword,
-    DatabaseListener
-  }
+    // currentUser,
+    // login,
+    // signup,
+    // logout,
+    // resetPassword,
+    // updateEmail,
+    // signInWithGoogle,
+    // updatePassword,
+    // DatabaseListener
+  };
 
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
-  )
+  );
 }

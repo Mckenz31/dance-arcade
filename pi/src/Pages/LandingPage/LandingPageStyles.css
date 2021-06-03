@@ -142,7 +142,7 @@ header .logo
 {
   list-style: none;
 }
-.social li a
+.social li span
 {
   display: inline-block;
   margin-right: 20px;
@@ -150,7 +150,7 @@ header .logo
   transform: scale(0.5);
   transition: 0.5s;
 }
-.social li a:hover
+.social li span:hover
 {
   transform: scale(0.5) translateY(-15px);
 }

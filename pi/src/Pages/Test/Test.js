@@ -2,7 +2,11 @@ import React from 'react'
 // import Timer from '../../Components/Timer/Timer'
 import axios from 'axios'
 
-const dataSent = {
+const senddata = {
+  sender: "random1@gmail.com",
+  senderLink: "xyz",
+};
+const accdata = {
   sender: "random1@gmail.com",
   senderLink: "xyz",
   receiver: "random2@gmail.com",
@@ -15,14 +19,13 @@ const URL2 = process.env.REACT_APP_REQUEST_ACCEPTED;
 const Test = ({app}) => {
 
   const friendReq = async() => {
-    console.log(URL1);
-    const response = await axios.post(URL1, dataSent);
-    console.log(response);
+    const response = await axios.post(URL1, senddata);
+    console.log(response)
   }
 
   const acceptReq = async() => {
-    const response = await axios.post(URL2, dataSent);
-    console.log("Accept"+response);
+    const response = await axios.post(URL2, accdata);
+    console.log(response)
   }
   
     return (
