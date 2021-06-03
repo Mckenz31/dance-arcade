@@ -30,7 +30,6 @@ const ProfilePicker = () => {
   const handleClickAvater=(icon)=>{
     setUserAvatar(icon)
   }
-  console.log(userAvatar)
   const avatar = [
       {
           id:1,
@@ -70,6 +69,7 @@ const ProfilePicker = () => {
     
         {avatar.map(({id,icon})=>(
             <Avatar
+            key={id}
             id={id}
             src={icon}
             size={64}
