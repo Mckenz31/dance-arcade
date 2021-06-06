@@ -89,21 +89,23 @@ const Sidebar = ({ visible, onClose }) => {
     }
   }, [friendFound, searchFriend, foundProfile, userIdentity, isRequest]);
   useEffect(() => {
-    if (isRequest) {
-      if (!friendRequests.length) {
-        dispatch(searchForFriend(userIdentity, false));
-      }
-      if (friendRequests.length > 0) {
-        for (var i = 0; i < friendRequests.length; i++) {
-          if (friendRequests[i].email === userIdentity) {
-            friendRequests.splice(i, 1);
-            break;
-          }
+    if (visible) {
+      if (isRequest) {
+        if (!friendRequests.length) {
+          dispatch(searchForFriend(userIdentity, false));
         }
-        setFriendRequestList(friendRequests);
+        if (friendRequests.length > 0) {
+          for (var i = 0; i < friendRequests.length; i++) {
+            if (friendRequests[i].email === userIdentity) {
+              friendRequests.splice(i, 1);
+              break;
+            }
+          }
+          setFriendRequestList(friendRequests);
+        }
       }
     }
-  }, [dispatch, userIdentity, isRequest, friendRequests]);
+  }, [dispatch, userIdentity, isRequest, friendRequests, visible]);
 
   const handleClickSentFriendRequest = (receiverEmail, receiverDp) => {
     const data = {

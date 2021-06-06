@@ -23,8 +23,8 @@ export const setToast = (message, isShow) => ({
 export const getCurrentUser = () => async (dispatch) => {
   auth.onAuthStateChanged((user) => {
     console.log(user, 'users');
-    dispatch({ type: SET_LOADER, payload: false });
     dispatch({ type: SET_USER_DATA, payload: user });
+    dispatch({ type: SET_LOADER, payload: false });
   });
 };
 export const signUp = (email, password) => async (dispatch) => {
@@ -43,7 +43,6 @@ export const signUp = (email, password) => async (dispatch) => {
   dispatch({ type: SET_AUTH_LOADER, payload: false });
 };
 export const signIn = (email, password) => async (dispatch) => {
-  dispatch({ type: SET_AUTH_LOADER, payload: true });
   await auth
     .signInWithEmailAndPassword(email, password)
     .then((response) => {
@@ -55,11 +54,8 @@ export const signIn = (email, password) => async (dispatch) => {
         payload: { message: error.message, showToast: true }
       });
     });
-
-  dispatch({ type: SET_AUTH_LOADER, payload: false });
 };
 export const logOut = () => async (dispatch) => {
-  dispatch({ type: SET_AUTH_LOADER, payload: true });
   await auth
     .signOut()
     .then((response) => {

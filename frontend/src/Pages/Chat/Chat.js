@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ChatEngine } from 'react-chat-engine';
 import { Spin } from 'antd';
+import { useSelector } from 'react-redux';
 
 import axios from 'axios';
 
-const Chat = ({ user }) => {
+const Chat = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-  //   const user = useSelector((state) => state.user.userInfo);
+  const user = useSelector((state) => state.user.userInfo);
 
   const getFile = async (url) => {
     const response = await fetch(url);

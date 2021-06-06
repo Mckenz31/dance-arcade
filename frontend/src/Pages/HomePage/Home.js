@@ -58,8 +58,8 @@ const Home = () => {
                 </a>
               </div>
               <div>
-                <a onClick={toggleAbout}>
-                  <span>about us</span>
+                <a href="/chat">
+                  <span>Chat Room</span>
                 </a>
               </div>
             </div>

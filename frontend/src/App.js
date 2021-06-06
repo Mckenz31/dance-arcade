@@ -44,20 +44,15 @@ const App = () => {
 
           <PrivateRoute path="/Home" component={Home} />
 
-          <Route
-            path="/chat"
-            render={(props) => <Chat user={user} {...props} />}
-          />
-
-          <Route
-            path="/single-player"
-            render={(props) => <SinglePlayer app={app} {...props} />}
-          />
+          <PrivateRoute path="/chat" component={Chat} />
 
           <PrivateRoute
-            path="/multi-player"
-            render={(props) => <MultiPlayer {...props} />}
+            path="/single-player"
+            component={SinglePlayer}
+            app={app}
           />
+
+          <PrivateRoute path="/multi-player" component={MultiPlayer} />
 
           <Route path="/test" render={(props) => <Test {...props} />} />
 
@@ -68,11 +63,4 @@ const App = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   user : state.user.userInfo
-// });
-
-// const mapDispatchToProps = {
-//   getCurrentUser,
-// };
 export default App;
