@@ -1,0 +1,205 @@
+.signup {
+  background-color: #e53d47 !important;
+}
+.signin {
+  background-color: #fee648 !important;
+}
+.offcanvas {
+  background-color: lightgrey;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.ant-drawer-body {
+  padding: 0px !important;
+}
+.ant-drawer-header {
+  border-radius: 7px !important;
+  padding: 0px !important;
+}
+.nav-bar {
+  height: 40px;
+  background: #03a9f4;
+  padding: 0px 10px;
+  min-height: 40px;
+}
+.ant-drawer-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-btn,
+.ant-avatar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  cursor: pointer !important;
+}
+
+.search {
+  height: 50px;
+  font-size: 1.2em;
+  width: 0;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+
+.icon {
+  min-width: 50px;
+  height: 50px;
+  width: 50px;
+  margin-left: 10px;
+  background: #03a9f4;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8em;
+  color: #fff;
+  cursor: pointer;
+  transform: translateX(30px);
+
+  margin-left: -30px;
+}
+
+.icon span {
+  transform: rotate(-45deg);
+}
+
+.active {
+  width: 100%;
+  padding-left: 40px;
+}
+.add-friend {
+  cursor: pointer;
+  width: 50px;
+}
+.friend {
+  background: #052230;
+  border: 2px solid #9ecaed;
+  max-height: 58px;
+  height: 57px;
+  min-height: 55px;
+  max-width: 275px;
+  width: 273px;
+  min-width: 271px;
+  margin-bottom: 5px;
+  border-radius: 7px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.friend.request {
+  max-width: 99%;
+  width: 90%;
+  min-width: 90%;
+}
+.friend.user {
+  max-width: 100%;
+  width: 100%;
+  min-width: 100%;
+  margin-bottom: 0px;
+}
+.friend.sent {
+  max-width: 285px;
+  width: 285px;
+  min-width: 275px;
+}
+.friend:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+.friend-name {
+  margin-left: 18px;
+}
+.ant-collapse-content-box {
+  background: #161616;
+  padding: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.bg-trans {
+  background: red !important;
+}
+.found.friend {
+  width: 90%;
+  margin: 4px auto;
+}
+.color-black {
+  color: black;
+}
+.ant-collapse-header,
+.anticon-caret-right {
+  color: white !important;
+}
+.ant-drawer-body,
+.ant-drawer-footer,
+.ant-collapse-content-box,
+.ant-drawer-body,
+.ant-drawer-header,
+.friend-fn {
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.ant-collapse,
+.ant-collapse-content,
+.ant-collapse-item,
+.ant-drawer-content,
+.ant-drawer-wrapper-body {
+  background: transparent !important;
+}
+.add-friend {
+  width: 55px;
+  background: #052230;
+  height: auto;
+}
+.friend-fn {
+  color: black;
+}
+.icons {
+  transform: scale(1);
+  transition: all 0.2s;
+}
+.icons:hover {
+  transform: scale(1.3);
+  color: red !important;
+}
+.ant-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+}
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+}
+.logout {
+  background: transparent;
+  color: white;
+  outline: none;
+  border: none;
+}
+.ant-spin {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, 50%);
+}
