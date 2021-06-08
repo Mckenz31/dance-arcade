@@ -19,7 +19,7 @@ import {
 const Auth = () => {
   const [active, setActive] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
-  const [userName, setUserName] = useState('');
+  const userName = useRef('');
   const loading = useSelector((state) => state.user.authLoader);
   const activeCss = active ? 'active' : '';
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Auth = () => {
     if (!userAvatar) {
       return warning('Please select the avatar');
     }
-    if (!userName) {
+    if (!userName.current.value) {
       return warning('Please select a unique username');
     }
     if (
@@ -50,7 +50,7 @@ const Auth = () => {
       signUp(
         SignUp_emailRef.current.value,
         SignUp_passwordRef.current.value,
-        userName,
+        userName.current.value,
         userAvatar
       )
     );
@@ -145,8 +145,7 @@ const Auth = () => {
               <input
                 type="text"
                 required
-                value={userName}
-                onClick={(e) => setUserName(e.target.value)}
+                ref={userName}
                 placeholder="Enter Username"
               />
               <input

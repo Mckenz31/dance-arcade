@@ -19,6 +19,7 @@ import {
 import { getCurrentUser } from './actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from './Components/Message/Message';
+import { logOut } from './actions/actions';
 
 const App = () => {
   const app = new PIXI.Application({
@@ -34,7 +35,9 @@ const App = () => {
       dispatch(getCurrentUser());
     }
   }, [dispatch, user]);
-
+  function handleLogout() {
+    dispatch(logOut());
+  }
   return (
     <Router>
       <Message />
@@ -42,9 +45,17 @@ const App = () => {
         <Switch>
           <PublicRoute exact component={LandingPage} path="/" />
 
-          <PrivateRoute path="/Home" component={Home} />
+          <PrivateRoute
+            path="/Home"
+            component={Home}
+            handleLogout={handleLogout}
+          />
 
-          <PrivateRoute path="/chat" component={Chat} />
+          <PrivateRoute
+            path="/chat"
+            component={Chat}
+            handleLogout={handleLogout}
+          />
 
           <PrivateRoute
             path="/single-player"

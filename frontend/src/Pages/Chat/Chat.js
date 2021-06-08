@@ -6,24 +6,19 @@ import { useSelector } from 'react-redux';
 
 import axios from 'axios';
 
-const Chat = () => {
+const Chat = ({ handleLogout }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.user.userInfo);
-
   const getFile = async (url) => {
     const response = await fetch(url);
     const data = await response.blob();
-
     return new File([data], 'userPhoto.jpeg', { type: 'image/jpeg' });
   };
 
   useEffect(() => {
-    // if (!user) {
-    //   history.push("/auth")
-    //   return
-    // }
     if (user) {
+      console.log(user.email, user.uid, 'user.email');
       axios
         .get('https://api.chatengine.io/users/me', {
           headers: {
@@ -40,7 +35,9 @@ const Chat = () => {
           formdata.append('email', user.email);
           formdata.append('username', user.email);
           formdata.append('secret', user.uid);
-          getFile(user.photoURL).then((avatar) => {
+          getFile(
+            'https://www.pngitem.com/pimgs/m/24-248235_user-profile-avatar-login-account-fa-user-circle.png'
+          ).then((avatar) => {
             formdata.append('avatar', avatar, avatar.name);
             axios
               .post('https://api.chatengine.io/users/', formdata, {
@@ -58,19 +55,23 @@ const Chat = () => {
         });
     }
   }, [user, history]);
-  if (!user || loading) return <Spin className="m-auto" />;
+  // if (!user || loading) return <Spin />;
   return (
     <div className="chats-page">
       <div className="nav-bar align-items-center d-flex justify-content-between">
-        <div className="logo">DANCE DANCE ARCADE</div>
-        <div className="logout">Logout</div>
+        <span className="brand">Dance Dance Arcade</span>
+        <button className="logout" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
-      <ChatEngine
-        height="calc(100vh - 66px)"
-        projectID="5dae63d0-0c24-478b-ae55-335f606c291f"
-        userName={user.email}
-        userSecret={user.uid}
-      />
+      <Spin spinning={loading}>
+        <ChatEngine
+          height="calc(100vh - 66px)"
+          projectID="5dae63d0-0c24-478b-ae55-335f606c291f"
+          userName={user.email}
+          userSecret={user.uid}
+        />
+      </Spin>
     </div>
   );
 };

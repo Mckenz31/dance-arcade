@@ -8,7 +8,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../actions/actions';
 
-const Home = () => {
+const Home = ({ handleLogout }) => {
   const [showAboutUs, setShowAboutUs] = useState(false);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
@@ -19,9 +19,9 @@ const Home = () => {
     setVisible(false);
   };
 
-  function handleLogout() {
-    dispatch(logOut());
-  }
+  // function handleLogout() {
+  //   dispatch(logOut());
+  // }
   const toggleAbout = () => {
     setShowAboutUs(!showAboutUs);
   };

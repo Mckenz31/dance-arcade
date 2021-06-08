@@ -181,3 +181,25 @@
   display: flex;
   align-items: center;
 }
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+}
+.logout {
+  background: transparent;
+  color: white;
+  outline: none;
+  border: none;
+}
+.ant-spin {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, 50%);
+}
