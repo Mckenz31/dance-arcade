@@ -27,21 +27,26 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch({ type: SET_LOADER, payload: false });
   });
 };
-export const signUp = (email, password) => async (dispatch) => {
-  dispatch({ type: SET_AUTH_LOADER, payload: true });
-  await auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((response) => {
-      dispatch({ type: SET_SIGN_UP, payload: response });
-    })
-    .catch((error) => {
-      dispatch({
-        type: SET_TOAST,
-        payload: { message: error.message, showToast: true }
+export const signUp =
+  (email, password, userName, userAvatar) => async (dispatch) => {
+    dispatch({ type: SET_AUTH_LOADER, payload: true });
+    await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        response.user.updateProfile({
+          userName: userName,
+          userAvatar: userAvatar
+        });
+        dispatch({ type: SET_SIGN_UP, payload: response });
+      })
+      .catch((error) => {
+        dispatch({
+          type: SET_TOAST,
+          payload: { message: error.message, showToast: true }
+        });
       });
-    });
-  dispatch({ type: SET_AUTH_LOADER, payload: false });
-};
+    dispatch({ type: SET_AUTH_LOADER, payload: false });
+  };
 export const signIn = (email, password) => async (dispatch) => {
   await auth
     .signInWithEmailAndPassword(email, password)

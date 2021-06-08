@@ -8,7 +8,7 @@ import Image2 from '../../images/img2.jpg';
 import { AuthContainer } from './AuthStyles';
 import { message } from 'antd';
 import ProfilePicker from '../../Components/profile-picker/ProfilePicker';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   signUp,
   signIn,
@@ -18,6 +18,8 @@ import {
 
 const Auth = () => {
   const [active, setActive] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const [userName, setUserName] = useState('');
   const loading = useSelector((state) => state.user.authLoader);
   const activeCss = active ? 'active' : '';
   const dispatch = useDispatch();
@@ -33,13 +35,24 @@ const Auth = () => {
 
   const HandleSubmitSignUp = (e) => {
     e.preventDefault();
+    if (!userAvatar) {
+      return warning('Please select the avatar');
+    }
+    if (!userName) {
+      return warning('Please select a unique username');
+    }
     if (
       SignUp_passwordRef.current.value !==
       SignUp_confirmPasswordRef.current.value
     )
       return warning('Passwords do not match');
     dispatch(
-      signUp(SignUp_emailRef.current.value, SignUp_passwordRef.current.value)
+      signUp(
+        SignUp_emailRef.current.value,
+        SignUp_passwordRef.current.value,
+        userName,
+        userAvatar
+      )
     );
   };
 
@@ -64,20 +77,13 @@ const Auth = () => {
 
   const warning = useCallback(
     (mess) => {
-      message.warning(mess, 3).then(afterClose);
+      message.warning(mess, 8).then(afterClose);
     },
     [afterClose]
   );
 
-  // useEffect(() => {
-  //     if(showMessage.isShowToast){
-  //         warning(showMessage.message)
-  //     }
-  // },[showMessage,warning])
-
   return (
     <AuthContainer className={`${bgColorCss}`}>
-      
       <div className={`container ${activeCss}`}>
         <div className="user siginBx">
           <div className="imgBx">
@@ -132,11 +138,15 @@ const Auth = () => {
                 <li>P</li>
               </ul>
 
-              <ProfilePicker />
+              <ProfilePicker
+                userAvatar={userAvatar}
+                setUserAvatar={setUserAvatar}
+              />
               <input
                 type="text"
                 required
-                ref={SignUp_emailRef}
+                value={userName}
+                onClick={(e) => setUserName(e.target.value)}
                 placeholder="Enter Username"
               />
               <input

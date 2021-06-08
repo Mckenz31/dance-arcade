@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
 import { Spin } from 'antd';
+import firebase from 'firebase';
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -11,7 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const loading = useSelector((state) => state.user.loading);
- 
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -25,6 +26,13 @@ export function AuthProvider({ children }) {
       // console.log(navigator.onLine,"online or offline"); // this should be uploaded to db
     });
   }, []);
+  // useEffect(() => {
+  //   auth.user().onCreate((user) => {
+  //     firebase.firestore().collection(user.email).doc('User Details').set({
+  //       hello: 'hello world'
+  //     });
+  //   });
+  // }, []);
 
   const value = {
     currentUser

@@ -173,3 +173,11 @@
   transform: scale(1.3);
   color: red !important;
 }
+.ant-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+}
