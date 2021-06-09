@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { auth } from '../Firebase/firebase';
-import * as functions from 'firebase-functions';
+// import * as functions from 'firebase-functions';
 import firebase from 'firebase';
 const AuthContext = React.createContext();
 
@@ -26,13 +26,13 @@ export function AuthProvider({ children }) {
       // console.log(navigator.onLine,"online or offline"); // this should be uploaded to db
     });
   }, []);
-  useEffect(() => {
-    functions.auth.user().onCreate((user) => {
-      firebase.firestore().collection(user.email).doc('User Details').set({
-        hello: 'world'
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   functions.auth.user().onCreate((user) => {
+  //     firebase.firestore().collection(user.email).doc('User Details').set({
+  //       hello: 'world'
+  //     });
+  //   });
+  // }, []);
 
   const value = {
     currentUser

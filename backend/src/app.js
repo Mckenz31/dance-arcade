@@ -50,14 +50,32 @@ var post = [
   { one: false, two: true, three: false, four: false },
   { one: false, two: false, three: true, four: false },
   { one: true, two: false, three: false, four: false },
+  { one: false, two: false, three: false, four: true },
+  { one: false, two: false, three: true, four: false },
+  { one: true, two: false, three: false, four: false },
+  { one: false, two: false, three: false, four: true },
+  { one: false, two: false, three: true, four: false },
+  { one: true, two: false, three: false, four: false },
+  { one: false, two: false, three: false, four: true },
+  { one: false, two: false, three: true, four: false },
+  { one: true, two: false, three: false, four: false },
   { one: false, two: true, three: false, four: false },
+  { one: false, two: false, three: true, four: true },
+  { one: true, two: false, three: false, four: false },
+  { one: false, two: true, three: false, four: false },
+  { one: false, two: false, three: true, four: false },
+  { one: false, two: false, three: false, four: true },
+  { one: false, two: true, three: false, four: false },
+  { one: false, two: false, three: true, four: false },
+  { one: true, two: false, three: false, four: false },
+  { one: false, two: false, three: false, four: true },
   { one: false, two: false, three: true, four: false }
 ];
 
 function onClick() {
   setTimeout(() => {
     waiting();
-  }, 2000); //Waits before the game starts running
+  }, 2750); //Waits before the game starts running
 }
 
 function waiting() {
@@ -65,7 +83,7 @@ function waiting() {
   if (i < post.length) {
     chktimer = setInterval(() => {
       checking();
-    }, 2000); //Each step pressed is checked at short time intervals to derive
+    }, 500); //Each step pressed is checked at short time intervals to derive
   }
 }
 
