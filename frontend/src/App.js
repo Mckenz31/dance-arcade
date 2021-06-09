@@ -7,7 +7,8 @@ import {
   Home,
   AuthScreen,
   Test,
-  Chat
+  Chat,
+  Score
 } from './Pages';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthProvider } from './Components/contexts/AuthContext';
@@ -62,10 +63,14 @@ const App = () => {
             component={SinglePlayer}
             app={app}
           />
+          <PrivateRoute
+            path="/score"
+            component={Score}
+          />
 
           <PrivateRoute path="/multi-player" component={MultiPlayer} />
 
-          <Route path="/test" render={(props) => <Test {...props} />} />
+          <Route path="/test" component={Test} />
 
           <PublicRoute path="/auth" component={AuthScreen} />
         </Switch>

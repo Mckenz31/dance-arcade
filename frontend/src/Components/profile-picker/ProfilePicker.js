@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Avatar, Row, Modal, Button } from 'antd';
 import { ProfilePickerContainer } from './ProfileStyles';
 import { UserOutlined } from '@ant-design/icons';
-import Corgi from '../../images/corgi.png';
+import corgi from '../../images/corgi.png';
 import Cat from '../../images/cat.png';
-import Pen from '../../images/pen.png';
-import Dino from '../../images/dino.png';
+import pen from '../../images/pen.png';
+import dino from '../../images/dino.png';
 import Ele from '../../images/ele.png';
-import Fox from '../../images/fox.png';
+import fox from '../../images/fox.png';
 import But from '../../images/but.png';
 
-const ProfilePicker = ({ userAvatar, setUserAvatar }) => {
+const ProfilePicker = ({ userAvatar, setUserAvatar, setUserAvatarName }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -25,37 +25,45 @@ const ProfilePicker = ({ userAvatar, setUserAvatar }) => {
     setUserAvatar();
     setIsModalVisible(false);
   };
-  const handleClickAvater = (icon) => {
+  const handleClickAvater = (icon, name) => {
     setUserAvatar(icon);
+    setUserAvatarName(name);
   };
   const avatar = [
     {
       id: 1,
-      icon: Corgi
+      name: 'corgi',
+      icon: corgi
     },
     {
       id: 2,
+      name: 'Cat',
       icon: Cat
     },
     {
       id: 3,
+      name: 'Ele',
       icon: Ele
     },
     {
       id: 4,
-      icon: Pen
+      name: 'pen',
+      icon: pen
     },
     {
       id: 5,
+      name: 'but',
       icon: But
     },
     {
       id: 6,
-      icon: Dino
+      name: 'dino',
+      icon: dino
     },
     {
       id: 7,
-      icon: Fox
+      name: 'fox',
+      icon: fox
     }
   ];
   return (
@@ -82,13 +90,13 @@ const ProfilePicker = ({ userAvatar, setUserAvatar }) => {
         ]}
       >
         <Row>
-          {avatar.map(({ id, icon }) => (
+          {avatar.map(({ id, icon, name }) => (
             <Avatar
               key={id}
               id={id}
               src={icon}
               size={64}
-              onClick={() => handleClickAvater(icon)}
+              onClick={() => handleClickAvater(icon, name)}
             />
           ))}
         </Row>

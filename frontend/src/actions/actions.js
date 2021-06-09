@@ -1,5 +1,5 @@
 import { actionTypes } from '../constants/actionTypes';
-import { auth } from '../Components/Firebase/firebase';
+import { auth, db } from '../Components/Firebase/firebase';
 import firebase from 'firebase';
 
 const {
@@ -10,7 +10,9 @@ const {
   SET_SIGN_UP,
   SET_SIGN_IN,
   SET_LOGOUT,
-  SET_GOOGLE_SIGNIN
+  SET_GOOGLE_SIGNIN,
+  SET_IS_NEW_USER,
+  User_Details
 } = actionTypes;
 
 export const setLoader = (payload) => ({ type: SET_LOADER, payload });
@@ -22,7 +24,6 @@ export const setToast = (message, isShow) => ({
 
 export const getCurrentUser = () => async (dispatch) => {
   auth.onAuthStateChanged((user) => {
-    console.log(user, 'users');
     dispatch({ type: SET_USER_DATA, payload: user });
     dispatch({ type: SET_LOADER, payload: false });
   });
@@ -33,11 +34,28 @@ export const signUp =
     await auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
-        response.user.updateProfile({
-          userName: userName,
-          userAvatar: userAvatar
+        setTimeout(() => {
+          db.collection(email)
+            .doc(User_Details)
+            .update({ userName, userAvatar });
+
+          db.collection(email).doc('Game Request').set({
+            email: email,
+            dp: userAvatar
+          });
+          db.collection(email).doc('Game Accept').set({
+            email: email,
+            dp: userAvatar
+          });
+        }, 8000);
+        dispatch({
+          type: SET_SIGN_UP,
+          payload: response
         });
-        dispatch({ type: SET_SIGN_UP, payload: response });
+        dispatch({
+          type: SET_IS_NEW_USER,
+          payload: response.additionalUserInfo.isNewUser
+        });
       })
       .catch((error) => {
         dispatch({
@@ -52,6 +70,10 @@ export const signIn = (email, password) => async (dispatch) => {
     .signInWithEmailAndPassword(email, password)
     .then((response) => {
       dispatch({ type: SET_SIGN_IN, payload: response });
+      dispatch({
+        type: SET_IS_NEW_USER,
+        payload: response.additionalUserInfo.isNewUser
+      });
     })
     .catch((error) => {
       dispatch({
@@ -79,13 +101,17 @@ export const signInWithGoogle = () => async (dispatch) => {
     .signInWithPopup(provider)
     .then((response) => {
       dispatch({ type: SET_GOOGLE_SIGNIN, payload: response });
+      dispatch({
+        type: SET_IS_NEW_USER,
+        payload: response.additionalUserInfo.isNewUser
+      });
     })
     .catch((error) => {
-      console.log('came here');
       dispatch({
         type: SET_TOAST,
         payload: { message: error.message, showToast: true }
       });
     });
 };
+
 export const checkStatus = () => async (dispatch) => {};

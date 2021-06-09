@@ -19,6 +19,7 @@ import {
 const Auth = () => {
   const [active, setActive] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
+  const [userAvatarName, setUserAvatarName] = useState('');
   const userName = useRef('');
   const loading = useSelector((state) => state.user.authLoader);
   const activeCss = active ? 'active' : '';
@@ -51,7 +52,7 @@ const Auth = () => {
         SignUp_emailRef.current.value,
         SignUp_passwordRef.current.value,
         userName.current.value,
-        userAvatar
+        userAvatarName
       )
     );
   };
@@ -141,6 +142,7 @@ const Auth = () => {
               <ProfilePicker
                 userAvatar={userAvatar}
                 setUserAvatar={setUserAvatar}
+                setUserAvatarName={setUserAvatarName}
               />
               <input
                 type="text"

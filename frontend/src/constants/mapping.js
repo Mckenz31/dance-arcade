@@ -9,8 +9,8 @@ import panda from '../images/panda.png';
 import but from '../images/but.png';
 
 export const dpMapping={
-    cat: Cat,
-    ele:Ele,
+    Cat: Cat,
+    Ele:Ele,
     corgi:corgi,
     dino:dino,
     fox:fox,

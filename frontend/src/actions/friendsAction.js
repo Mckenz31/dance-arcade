@@ -9,7 +9,9 @@ const {
   SET_TOAST,
   SET_SEARCH_FRIEND,
   SET_FRIEND_REQUEST_LIST,
-  FRIEND_REQUEST
+  FRIEND_REQUEST,
+  User_Details,
+  SET_USER_PROFILE_DATA
 } = actionTypes;
 
 export const GetFriendsList = (collection) => async (dispatch) => {
@@ -18,6 +20,18 @@ export const GetFriendsList = (collection) => async (dispatch) => {
       .doc(FRIENDS_LIST)
       .onSnapshot((snap) => {
         dispatch({ type: SET_FRIENDS, payload: snap.data().requests });
+      });
+  } catch (e) {}
+};
+export const getUserData = (collection) => async (dispatch) => {
+  try {
+    db.collection(collection)
+      .doc(User_Details)
+      .onSnapshot((snap) => {
+        dispatch({
+          type: SET_USER_PROFILE_DATA,
+          payload: snap.data()
+        });
       });
   } catch (e) {}
 };

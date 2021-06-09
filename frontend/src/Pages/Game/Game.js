@@ -1,59 +1,43 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import BGM from '../../video/bgm.mp3';
+import { useHistory } from 'react-router-dom';
 import BgVideo from '../../video/bgVideo2.mp4';
 import * as PIXI from 'pixi.js';
 import { GameContainer } from './GameStyles';
 import LeftArrow from '../../images/left-arrow.png';
 import RightArrow from '../../images/right.png';
 import { TweenMax, Linear } from 'gsap';
-// import axios from 'axios';
+import GameEndsCard from '../../Components/GameEndsCard/GameEndsCard';
+import axios from 'axios';
 import Timer from '../../Components/Timer/Timer';
+
 const Game = ({ app }) => {
   const myVar = useRef();
+  const history = useHistory();
   const [data, setData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [isGameEnds, setIsGameEnds] = useState(false);
   const [startgame, setStartGame] = useState(false);
   useEffect(() => {
     if (startgame) {
+      setIsGameEnds(false);
       setData([
         //Game data
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: true, two: false, three: false, four: false },
+        // { one: true, two: false, three: false, four: false },
+        // { one: false, two: false, three: false, four: true },
+        // { one: false, two: false, three: true, four: false },
+        // { one: true, two: false, three: false, four: false },
+        // { one: false, two: true, three: false, four: false },
+        // { one: false, two: false, three: true, four: false },
+        // { one: false, two: false, three: true, four: false },
+        // { one: false, two: false, three: false, four: true },
+        // { one: false, two: false, three: true, four: false },
+        // { one: false, two: false, three: false, four: true },
         { one: false, two: true, three: false, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: true, three: false, four: false }
+        { gameEnds: true }
       ]);
     }
   }, [startgame]);
-
-  // const getData = async () => {
-  //   let data = await axios.get('http://localhost:3000/steps');
-  //   setData([
-  //     //Game data
-  //     { one: true, two: false, three: false, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: true, two: false, three: false, four: false },
-  //     { one: false, two: true, three: false, four: false },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: true, three: false, four: false }
-  //   ]);
-  // };
-
-  const bgm = useRef(new Audio(BGM));
-
-  useEffect(() => {
-    bgm.current.play();
-  }, [bgm]);
 
   const CreateArrow = useCallback(
     (image, scalex, scaley, posx, posy, rotation = 0) => {
@@ -112,7 +96,21 @@ const Game = ({ app }) => {
       ease: Linear.easeNone
     });
   }, [CreateArrow]);
-
+  const handleEndGame = async () => {
+    setTimeout(async () => {
+      // let data = await axios.get('http://localhost:3000/finalScore');
+      // console.log(data, 'fincal score');
+      setScore(230);
+      setIsGameEnds(true);
+      setTimeout(() => {
+        history.push({
+          pathname: '/score',
+          score: 230
+        });
+      }, 8000);
+      console.log('game ends');
+    }, 2000);
+  };
   const PlayArrows = useCallback(
     (data) => {
       var counter = 0;
@@ -137,6 +135,9 @@ const Game = ({ app }) => {
           case 'four':
             PlayDownArrow();
             break;
+          case 'gameEnds':
+            handleEndGame();
+            break;
           default:
             break;
         }
@@ -158,6 +159,7 @@ const Game = ({ app }) => {
   return (
     <React.Fragment>
       <GameContainer className="showcase">
+        {isGameEnds && <GameEndsCard score={score} />}
         <section>
           <video
             className="video"
