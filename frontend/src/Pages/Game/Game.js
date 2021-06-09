@@ -18,46 +18,26 @@ const Game = ({ app }) => {
   const [score, setScore] = useState(0);
   const [isGameEnds, setIsGameEnds] = useState(false);
   const [startgame, setStartGame] = useState(false);
+  
   useEffect(() => {
     if (startgame) {
-      setIsGameEnds(false);
-      setData([
-        //Game data
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: true, three: false, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: true, three: false, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: true, three: false, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: true, three: false, four: false },
-        { gameEnds: true }
-      ]);
+      setIsGameEnds(false)
+      getData();
     }
   }, [startgame]);
+
+
+  const getData = async () => {
+    let data = await axios.get('http://localhost:3000/steps');
+    setData(data.data);
+    console.log(data.data);
+  };
+
+  const bgm = useRef(new Audio(BGM));
+
+  useEffect(() => {
+    bgm.current.play();
+  }, [bgm]);
 
   const CreateArrow = useCallback(
     (image, scalex, scaley, posx, posy, rotation = 0) => {
