@@ -1,0 +1,148 @@
+.score-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  background: red;
+}
+
+.score-container button {
+  background: white;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.score-container ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 10px;
+}
+
+.score-container ul li {
+  list-style: none;
+  font-family: Poppin;
+  font-size: 2em;
+  letter-spacing: 15px;
+  color: #484848;
+  text-shadow: none;
+  -webkit-animation: animate 2s infinite linear;
+          animation: animate 2s infinite linear;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    color: #484848;
+    text-shadow: none;
+  }
+  18% {
+    color: #484848;
+    text-shadow: none;
+  }
+  20% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  30% {
+    color: #484848;
+    text-shadow: none;
+  }
+  35% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  50% {
+    color: #484848;
+    text-shadow: none;
+  }
+  55% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  70% {
+    color: #484848;
+    text-shadow: none;
+  }
+  85% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  90% {
+    color: #484848;
+    text-shadow: none;
+  }
+  100% {
+    color: #484848;
+    text-shadow: none;
+  }
+}
+
+@keyframes animate {
+  0% {
+    color: #484848;
+    text-shadow: none;
+  }
+  18% {
+    color: #484848;
+    text-shadow: none;
+  }
+  20% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  30% {
+    color: #484848;
+    text-shadow: none;
+  }
+  35% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  50% {
+    color: #484848;
+    text-shadow: none;
+  }
+  55% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  70% {
+    color: #484848;
+    text-shadow: none;
+  }
+  85% {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 20px #ff6c00;
+  }
+  90% {
+    color: #484848;
+    text-shadow: none;
+  }
+  100% {
+    color: #484848;
+    text-shadow: none;
+  }
+}
+/*# sourceMappingURL=score.css.map */

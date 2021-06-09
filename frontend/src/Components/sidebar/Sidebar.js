@@ -15,7 +15,8 @@ import {
   GetFriendsList,
   searchForFriend,
   sendFriendRequest,
-  acceptFriendRequest
+  acceptFriendRequest,
+  getUserData
 } from '../../actions/friendsAction';
 
 const Sidebar = ({ visible, onClose }) => {
@@ -33,6 +34,7 @@ const Sidebar = ({ visible, onClose }) => {
   const { Panel } = Collapse;
   const dispatch = useDispatch();
   const FriendsList = useSelector((state) => state.friends.friendsList);
+  const userProfileData = useSelector((state) => state.friends.userProfile);
   const userIdentity = useSelector((state) => state.user.userInfo.email);
   const friendFound = useSelector(
     (state) => state.friends.searchedFriend.requests
@@ -52,20 +54,27 @@ const Sidebar = ({ visible, onClose }) => {
   const onCloseDrawer = () => {
     setShowChildrenDrawer(false);
   };
-
+  useEffect(() => {
+    if (!userProfileData) {
+      dispatch(getUserData(userIdentity));
+    } else {
+      setUserProfile(userProfileData);
+      console.log(dpMapping[userProfile], 'userAvatar');
+    }
+  }, [dispatch, userIdentity, userProfileData]);
   useEffect(() => {
     if (visible) {
+      console.log(FriendsList);
       if (FriendsList.length === 0) {
         dispatch(GetFriendsList(userIdentity));
       } else {
         for (var i = 0; i < FriendsList.length; i++) {
           if (FriendsList[i].email === userIdentity) {
-            setUserProfile(FriendsList[i]);
             FriendsList.splice(i, 1);
             break;
           }
         }
-        setFriends(FriendsList, 'friendslist');
+        setFriends(FriendsList);
       }
     }
   }, [FriendsList, dispatch, userIdentity, visible]);
@@ -141,13 +150,13 @@ const Sidebar = ({ visible, onClose }) => {
               <div className="w-25">
                 <Avatar
                   shape="square"
-                  src={dpMapping[userProfile.dp]}
+                  src={dpMapping[userProfile.userAvatar]}
                   alt=""
                   size={54}
                 />
               </div>
               <div className="w-100 bg-silver d-flex flex-column my-auto mx-2">
-                <p className="m-0 text-white">{userProfile.email}</p>
+                <p className="m-0 text-white">{userProfile.userName}</p>
                 <p className="m-0 text-white">available</p>
               </div>
             </div>

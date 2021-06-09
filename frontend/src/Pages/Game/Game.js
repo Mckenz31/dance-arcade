@@ -1,22 +1,31 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import BGM from '../../video/bgm.mp3';
+import { useHistory } from 'react-router-dom';
 import BgVideo from '../../video/bgVideo2.mp4';
 import * as PIXI from 'pixi.js';
 import { GameContainer } from './GameStyles';
 import LeftArrow from '../../images/left-arrow.png';
 import RightArrow from '../../images/right.png';
 import { TweenMax, Linear } from 'gsap';
+import GameEndsCard from '../../Components/GameEndsCard/GameEndsCard';
 import axios from 'axios';
 import Timer from '../../Components/Timer/Timer';
+
 const Game = ({ app }) => {
   const myVar = useRef();
+  const history = useHistory();
   const [data, setData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [isGameEnds, setIsGameEnds] = useState(false);
   const [startgame, setStartGame] = useState(false);
+  
   useEffect(() => {
     if (startgame) {
+      setIsGameEnds(false)
       getData();
     }
   }, [startgame]);
+
 
   const getData = async () => {
     let data = await axios.get('http://localhost:3000/steps');
@@ -87,7 +96,21 @@ const Game = ({ app }) => {
       ease: Linear.easeNone
     });
   }, [CreateArrow]);
-
+  const handleEndGame = async () => {
+    setTimeout(async () => {
+      // let data = await axios.get('http://localhost:3000/finalScore');
+      // console.log(data, 'fincal score');
+      setScore(230);
+      setIsGameEnds(true);
+      setTimeout(() => {
+        history.push({
+          pathname: '/score',
+          score: 230
+        });
+      }, 8000);
+      console.log('game ends');
+    }, 2000);
+  };
   const PlayArrows = useCallback(
     (data) => {
       var counter = 0;
@@ -112,6 +135,9 @@ const Game = ({ app }) => {
           case 'four':
             PlayDownArrow();
             break;
+          case 'gameEnds':
+            handleEndGame();
+            break;
           default:
             break;
         }
@@ -133,6 +159,7 @@ const Game = ({ app }) => {
   return (
     <React.Fragment>
       <GameContainer className="showcase">
+        {isGameEnds && <GameEndsCard score={score} />}
         <section>
           <video
             className="video"
