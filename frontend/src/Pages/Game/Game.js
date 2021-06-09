@@ -6,7 +6,7 @@ import { GameContainer } from './GameStyles';
 import LeftArrow from '../../images/left-arrow.png';
 import RightArrow from '../../images/right.png';
 import { TweenMax, Linear } from 'gsap';
-// import axios from 'axios';
+import axios from 'axios';
 import Timer from '../../Components/Timer/Timer';
 const Game = ({ app }) => {
   const myVar = useRef();
@@ -14,40 +14,15 @@ const Game = ({ app }) => {
   const [startgame, setStartGame] = useState(false);
   useEffect(() => {
     if (startgame) {
-      setData([
-        //Game data
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: true, two: false, three: false, four: false },
-        { one: false, two: true, three: false, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: false, three: true, four: false },
-        { one: false, two: false, three: false, four: true },
-        { one: false, two: true, three: false, four: false }
-      ]);
+      getData();
     }
   }, [startgame]);
 
-  // const getData = async () => {
-  //   let data = await axios.get('http://localhost:3000/steps');
-  //   setData([
-  //     //Game data
-  //     { one: true, two: false, three: false, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: true, two: false, three: false, four: false },
-  //     { one: false, two: true, three: false, four: false },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: false, three: true, four: false },
-  //     { one: false, two: false, three: false, four: true },
-  //     { one: false, two: true, three: false, four: false }
-  //   ]);
-  // };
+  const getData = async () => {
+    let data = await axios.get('http://localhost:3000/steps');
+    setData(data.data);
+    console.log(data.data);
+  };
 
   const bgm = useRef(new Audio(BGM));
 
