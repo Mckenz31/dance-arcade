@@ -30,19 +30,6 @@ export function AuthProvider({ children }) {
     });
   }, []);
   // useEffect(() => {
-  //   if (isNewUser) {
-  //     const data = {
-  //       userName: 'hello world',
-  //       avatar: 'cat'
-  //     };
-  //     db.collection(user.email)
-  //       .doc('User Details')
-  //       .update(data)
-  //       .then(function () {
-  //         console.log('Document successfully written!');
-  //       });
-  //   }
-  // }, [isNewUser, user]);
 
   const value = {
     currentUser
