@@ -18,19 +18,44 @@ const Game = ({ app }) => {
   const [score, setScore] = useState(0);
   const [isGameEnds, setIsGameEnds] = useState(false);
   const [startgame, setStartGame] = useState(false);
-  
+
   useEffect(() => {
     if (startgame) {
-      setIsGameEnds(false)
+      setIsGameEnds(false);
       getData();
     }
   }, [startgame]);
 
-
   const getData = async () => {
-    let data = await axios.get('http://localhost:3000/steps');
-    setData(data.data);
-    console.log(data.data);
+    // let data = await axios.get('http://localhost:3000/steps');
+    const data = [
+      //Game data
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: true, three: false, four: false },
+      { one: false, two: false, three: true, four: false },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: false, three: false, four: true },
+      { one: false, two: false, three: true, four: false },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: false, three: false, four: true },
+      { one: false, two: false, three: true, four: false },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: false, three: false, four: true },
+      { one: false, two: false, three: true, four: false },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: true, three: false, four: false },
+      { one: false, two: false, three: true, four: true },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: true, three: false, four: false },
+      { one: false, two: false, three: true, four: false },
+      { one: false, two: false, three: false, four: true },
+      { one: false, two: true, three: false, four: false },
+      { one: false, two: false, three: true, four: false },
+      { one: true, two: false, three: false, four: false },
+      { one: false, two: false, three: false, four: true },
+      { gameEnds: true }
+    ];
+    setData(data);
   };
 
   const bgm = useRef(new Audio(BGM));
@@ -97,19 +122,16 @@ const Game = ({ app }) => {
     });
   }, [CreateArrow]);
   const handleEndGame = async () => {
-    setTimeout(async () => {
-      // let data = await axios.get('http://localhost:3000/finalScore');
-      // console.log(data, 'fincal score');
-      setScore(230);
-      setIsGameEnds(true);
-      setTimeout(() => {
-        history.push({
-          pathname: '/score',
-          score: 230
-        });
-      }, 8000);
-      console.log('game ends');
-    }, 2000);
+    // setTimeout(async () => {
+    //   setScore(230);
+    //   setIsGameEnds(true);
+    //   setTimeout(() => {
+    //     history.push({
+    //       pathname: '/score',
+    //       score: 230
+    //     });
+    //   }, 8000);
+    // }, 2000);
   };
   const PlayArrows = useCallback(
     (data) => {
@@ -173,6 +195,9 @@ const Game = ({ app }) => {
         </section>
         <div className="center">
           <Timer setStartGame={setStartGame} />
+        </div>
+        <div className="ml-auto">
+          <h1>13</h1>
         </div>
       </GameContainer>
     </React.Fragment>

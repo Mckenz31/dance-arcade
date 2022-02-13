@@ -37,12 +37,12 @@ const ProfilePicker = ({ userAvatar, setUserAvatar, setUserAvatarName }) => {
     },
     {
       id: 2,
-      name: 'Cat',
+      name: 'cat',
       icon: Cat
     },
     {
       id: 3,
-      name: 'Ele',
+      name: 'ele',
       icon: Ele
     },
     {

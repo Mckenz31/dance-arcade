@@ -2,7 +2,6 @@ import React from 'react';
 import './score.css';
 import { useHistory } from 'react-router-dom';
 const Score = (props) => {
-  console.log(props);
   const history = useHistory();
   const handleClickPlayAgian = () => {
     history.push('/single-player');

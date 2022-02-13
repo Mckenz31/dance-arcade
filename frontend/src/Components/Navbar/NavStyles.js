@@ -14,7 +14,7 @@ export const NavbarContainer = styled.header`
   position: relative;
   overflow: hidden;
   padding: 0 !important;
-  height: 150px;
+  height: 100px;
   .container {
     max-width: 120rem;
     width: 90%;

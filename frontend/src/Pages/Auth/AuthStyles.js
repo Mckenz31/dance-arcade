@@ -43,7 +43,7 @@ const animate=keyframes`
     color:#484848;
     text-shadow:none;
   }
-  }
+  
   100%{
     color:#484848;
     text-shadow:none;

@@ -1,6 +1,7 @@
 import { actionTypes } from '../constants/actionTypes';
 import { db } from '../Components/Firebase/firebase';
 import axios from 'axios';
+import { doc, getDoc } from 'firebase/firestore';
 
 const {
   SET_FRIENDS,
@@ -45,6 +46,29 @@ export const searchForFriend = (collection, action) => async (dispatch) => {
         } else {
           dispatch({ type: SET_FRIEND_REQUEST_LIST, payload: snap.data() });
         }
+      } else {
+        dispatch({
+          type: SET_TOAST,
+          payload: {
+            message: 'No User Found with this Email id',
+            showToast: true
+          }
+        });
+      }
+    });
+};
+export const getFriend = (email) => async (dispatch) => {
+  db.collection(email)
+    .doc(User_Details)
+    .onSnapshot((snap) => {
+      if (snap.data()) {
+        const data = {
+          email: email,
+          dp: snap.data().userAvatar,
+          usName: snap.data().usName,
+          userID: snap.data().userID
+        };
+        dispatch({ type: SET_SEARCH_FRIEND, payload: data });
       } else {
         dispatch({
           type: SET_TOAST,

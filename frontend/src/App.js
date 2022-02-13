@@ -21,6 +21,7 @@ import { getCurrentUser } from './actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from './Components/Message/Message';
 import { logOut } from './actions/actions';
+import { getUserData } from './actions/friendsAction';
 
 const App = () => {
   const app = new PIXI.Application({
@@ -39,6 +40,9 @@ const App = () => {
   function handleLogout() {
     dispatch(logOut());
   }
+  useEffect(() => {
+    dispatch(getUserData());
+  }, []);
   return (
     <Router>
       <Message />
@@ -63,10 +67,7 @@ const App = () => {
             component={SinglePlayer}
             app={app}
           />
-          <PrivateRoute
-            path="/score"
-            component={Score}
-          />
+          <PrivateRoute path="/score" component={Score} />
 
           <PrivateRoute path="/multi-player" component={MultiPlayer} />
 

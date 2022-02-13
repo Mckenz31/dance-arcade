@@ -10,9 +10,10 @@ const {
 } = actionTypes;
 
 const initialState = {
-  userProfile:null,
-  friendsList: [],
+  userProfile: null,
+  friendsList: null,
   searchedFriend: { requests: [] },
+  searchForFriend: null,
   friendRequestList: { requests: [] },
   sentRequestResponse: null,
   acceptRequestReponse: null
@@ -23,7 +24,7 @@ export default function friends(state = initialState, { type, payload }) {
     case SET_FRIENDS:
       return { ...state, friendsList: payload };
     case SET_SEARCH_FRIEND:
-      return { ...state, searchedFriend: payload };
+      return { ...state, searchForFriend: payload };
     case SET_FRIEND_REQUEST_LIST:
       return { ...state, friendRequestList: payload };
     case SET_SENT_FRIEND_REQUEST:
