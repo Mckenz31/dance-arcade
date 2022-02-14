@@ -5,12 +5,9 @@ import './HomeStyles.js';
 import { HomeContainer } from './HomeStyles';
 import Sidebar from '../../Components/sidebar/Sidebar';
 import Navbar from '../../Components/Navbar/Navbar';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../actions/actions';
 
 const Home = ({ handleLogout }) => {
   const [showAboutUs, setShowAboutUs] = useState(false);
-  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -19,9 +16,6 @@ const Home = ({ handleLogout }) => {
     setVisible(false);
   };
 
-  // function handleLogout() {
-  //   dispatch(logOut());
-  // }
   const toggleAbout = () => {
     setShowAboutUs(!showAboutUs);
   };

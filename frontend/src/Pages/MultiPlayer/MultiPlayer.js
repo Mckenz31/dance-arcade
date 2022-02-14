@@ -36,7 +36,6 @@ const MultiPlayer = () => {
   }, [socket]);
 
   const sendMessage = async (value) => {
-    setCurrentMsg(value);
     const messageData = {
       author: userName,
       room: roomId,
@@ -86,11 +85,7 @@ const MultiPlayer = () => {
             </button>
           </div>
           <div className="sent mt-4">
-            <input
-              type="text"
-              value={currentMsg}
-              onChange={(e) => sendMessage(e.target.value)}
-            />
+            <input type="text" onChange={(e) => sendMessage(e.target.value)} />
           </div>
           <h1 className="text-white">
             {recievedMsg?.message && recievedMsg.message}

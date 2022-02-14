@@ -18,6 +18,7 @@ const Navbar = ({ handleLogout, toggleAbout }) => {
       setUserProfile(userProfileData);
     }
   }, [dispatch, userIdentity, userProfileData]);
+  console.log(userProfile, 'userProfile');
   return (
     <NavbarContainer>
       <div className="container">

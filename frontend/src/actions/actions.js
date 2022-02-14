@@ -37,7 +37,7 @@ export const signUp =
         setTimeout(() => {
           db.collection(email)
             .doc(User_Details)
-            .update({ usName: userName, userAvatar });
+            .update({ usName: userName, userAvatar, email: email });
           db.collection(email).doc('Game Request').set({
             email: email,
             dp: userAvatar
@@ -46,7 +46,7 @@ export const signUp =
             email: email,
             dp: userAvatar
           });
-        }, 10000);
+        }, 5000);
         dispatch({
           type: SET_SIGN_UP,
           payload: response
