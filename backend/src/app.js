@@ -2,6 +2,10 @@ const express = require('express');
 
 const app = express();
 const cors = require('cors');
+const server = http.createServer(app);
+
+const { Server } = require('socket.io');
+app.use(cors());
 
 var i = 0;
 var chktimer;
@@ -131,3 +135,41 @@ app.get('/finalScore', (req, res, next) => {
 });
 
 module.exports = app;
+
+// socket start
+
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log(`user connected ${socket.id}`);
+
+  socket.on('join_room', (data) => {
+    socket.join(data);
+    console.log(`user with id ${socket.id} joined room ${data}`);
+    socket.broadcast.emit(
+      'room_size',
+      io.sockets?.adapter.rooms.get(data).size
+    );
+  });
+
+  // socket.emit('count', 123); example to constantly send data to frontend
+
+  socket.on('send_message', (data) => {
+    socket.to(data.room).emit('recieve_message', data);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected', socket.id);
+  });
+});
+
+const PORT = 8000;
+server.listen(PORT, () => {
+  console.log(`server is running on ${PORT}....`);
+});
+
+// socket end
