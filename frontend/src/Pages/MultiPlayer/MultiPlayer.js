@@ -59,6 +59,7 @@ const MultiPlayer = () => {
 
       <div className="w-100 min-vh-100 d-flex justify-content-center align-items-center">
         <div className="create-room">
+          <h1 className="room-text">Number of Peoples : {roomSize}</h1>
           <div className="d-flex w-100 flex-column">
             <h1 className=" room-text">Multiplayer Mode</h1>
             <input
@@ -91,7 +92,9 @@ const MultiPlayer = () => {
               onChange={(e) => sendMessage(e.target.value)}
             />
           </div>
-          <p>{recievedMsg?.message && recievedMsg.message}</p>
+          <h1 className="text-white">
+            {recievedMsg?.message && recievedMsg.message}
+          </h1>
         </div>
       </div>
     </div>
