@@ -28,6 +28,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "rpi-gpio-buttons": "^2.0.1",
+    "socket.io-client": "^4.4.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.1.1"
   },
