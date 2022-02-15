@@ -19,7 +19,6 @@ const Score = (props) => {
   useEffect(() => {
     if (params) {
       unSubscribe && unSubscribe();
-      dispatch(deleteRoom(params.room));
     }
   }, []);
   return (
