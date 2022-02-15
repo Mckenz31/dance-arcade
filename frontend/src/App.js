@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from './Components/Message/Message';
 import { logOut } from './actions/actions';
 import { getUserData } from './actions/friendsAction';
+import Loader from './Components/Loader/Loader';
+import Lobby from './Pages/Lobby/Lobby';
 
 const App = () => {
   const app = new PIXI.Application({
@@ -31,6 +33,7 @@ const App = () => {
   });
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userInfo);
+  const spinner = useSelector((state) => state.user.spinner.spinning);
 
   useEffect(() => {
     if (!user) {
@@ -46,16 +49,15 @@ const App = () => {
   return (
     <Router>
       <Message />
+      {spinner && <Loader />}
       <AuthProvider>
         <Switch>
           <PublicRoute exact component={LandingPage} path="/" />
-
           <PrivateRoute
             path="/Home"
             component={Home}
             handleLogout={handleLogout}
           />
-
           <PrivateRoute
             path="/chat"
             component={Chat}
@@ -68,6 +70,8 @@ const App = () => {
             app={app}
           />
           <PrivateRoute path="/score" component={Score} />
+
+          <PrivateRoute path="/lobby" component={Lobby} />
 
           <PrivateRoute path="/multi-player" component={MultiPlayer} />
 

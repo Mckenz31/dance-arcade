@@ -5,7 +5,7 @@ import { dpMapping } from '../../constants/mapping';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../actions/friendsAction';
 
-const Navbar = ({ handleLogout, toggleAbout }) => {
+const Navbar = ({ handleLogout, toggleAbout, isMultiplayer }) => {
   const dispatch = useDispatch();
   const userIdentity = useSelector((state) => state.user.userInfo.email);
   const userProfileData = useSelector((state) => state.friends.userProfile);
@@ -18,7 +18,7 @@ const Navbar = ({ handleLogout, toggleAbout }) => {
       setUserProfile(userProfileData);
     }
   }, [dispatch, userIdentity, userProfileData]);
-  console.log(userProfile, 'userProfile');
+  
   return (
     <NavbarContainer>
       <div className="container">
@@ -44,19 +44,23 @@ const Navbar = ({ handleLogout, toggleAbout }) => {
               <li>
                 <span href="#">Home</span>
               </li>
-              <li>
-                <span href="#">Settings</span>
-              </li>
-              <li>
-                <span href="#" onClick={toggleAbout}>
-                  About
-                </span>
-              </li>
-              <li>
-                <span href="#" onClick={handleLogout}>
-                  logout
-                </span>
-              </li>
+              {!isMultiplayer && (
+                <>
+                  <li>
+                    <span href="#">Settings</span>
+                  </li>
+                  <li>
+                    <span href="#" onClick={toggleAbout}>
+                      About
+                    </span>
+                  </li>
+                  <li>
+                    <span href="#" onClick={handleLogout}>
+                      logout
+                    </span>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </nav>

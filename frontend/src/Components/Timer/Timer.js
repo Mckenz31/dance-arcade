@@ -5,7 +5,7 @@ const Timer = ({ setStartGame }) => {
   useEffect(() => {
     setTimeout(() => {
       setShowTimer(false);
-      setStartGame(true);
+      setStartGame && setStartGame(true);
     }, 3000);
   }, []);
   

@@ -12,10 +12,18 @@ const {
   SET_LOGOUT,
   SET_GOOGLE_SIGNIN,
   SET_IS_NEW_USER,
-  User_Details
+  User_Details,
+  SET_SPINNER
 } = actionTypes;
 
 export const setLoader = (payload) => ({ type: SET_LOADER, payload });
+export const setSpinner = (spinning, tip) => ({
+  type: SET_SPINNER,
+  payload: {
+    tip: tip,
+    spinning: spinning
+  }
+});
 export const setAuthLoader = (payload) => ({ type: SET_AUTH_LOADER, payload });
 export const setToast = (message, isShow) => ({
   type: SET_TOAST,

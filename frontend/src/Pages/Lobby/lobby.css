@@ -1,0 +1,71 @@
+.loginarea {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.chatarea {
+  min-height: 90vh;
+  max-height: 90vh;
+  background-color: transparent;
+  color: white;
+}
+.buttonarea {
+  min-height: 10vh;
+}
+h1 {
+  color: white !important;
+}
+.messages {
+  padding: 5% 0;
+  overflow-y: scroll;
+  flex: auto;
+  width: 100%;
+}
+.messages::-webkit-scrollbar {
+  display: none;
+}
+.ready {
+  width: 300px;
+  padding: 20px 0px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+.ready:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.ready:focus {
+  outline: none;
+}
+.btn-hover {
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}

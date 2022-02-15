@@ -9,13 +9,18 @@ const {
   SET_AUTH_LOADER,
   SET_TOAST,
   SET_GOOGLE_SIGNIN,
-  SET_IS_NEW_USER
+  SET_IS_NEW_USER,
+  SET_SPINNER
 } = actionTypes;
 
 const initialState = {
   userInfo: null,
   authLoader: false,
   loading: true,
+  spinner: {
+    tip: '',
+    spinning: false
+  },
   response: '',
   isNewUser: false,
   toast: { isShowToast: false, message: '' }
@@ -39,6 +44,8 @@ export default function user(state = initialState, { type, payload }) {
       return { ...state, authLoader: payload };
     case SET_IS_NEW_USER:
       return { ...state, isNewUser: payload };
+    case SET_SPINNER:
+      return { ...state, spinner: payload };
     case SET_TOAST:
       return {
         ...state,

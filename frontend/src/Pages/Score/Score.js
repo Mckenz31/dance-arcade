@@ -1,7 +1,14 @@
 import React from 'react';
 import './score.css';
 import { useHistory } from 'react-router-dom';
+import { deleteRoom, unSubscribe } from '../../actions/multiplayer';
+import { getQueryParams } from '../../utility';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 const Score = (props) => {
+  const params = getQueryParams(props.location.search);
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleClickPlayAgian = () => {
     history.push('/single-player');
@@ -9,6 +16,12 @@ const Score = (props) => {
   const handleClickBackToHome = () => {
     history.push('/Home');
   };
+  useEffect(() => {
+    if (params) {
+      unSubscribe && unSubscribe();
+      dispatch(deleteRoom(params.room));
+    }
+  }, []);
   return (
     <div className="score-container">
       <div>

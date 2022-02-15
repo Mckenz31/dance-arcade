@@ -19,5 +19,8 @@ export const actionTypes = {
   User_Details: 'User Details',
   SET_IS_NEW_USER: 'SET_IS_NEW_USER',
   SET_USER_PROFILE_DATA: 'SET_USER_PROFILE_DATA',
-  Game_Request:'Game Request'
+  Game_Request: 'Game Request',
+  SET_CREATE_ROOM: 'SET_CREATE_ROOM',
+  SET_SPINNER: 'SET_SPINNER',
+  SET_CHAT_MESSAGES: 'SET_CHAT_MESSAGES'
 };

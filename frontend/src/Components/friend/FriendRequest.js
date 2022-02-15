@@ -7,7 +7,6 @@ import Avatar from 'antd/lib/avatar/avatar';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setToast } from '../../actions/actions';
 import { getFriend, sendFriendRequest } from '../../actions/friendsAction';
 import { dpMapping } from '../../constants/mapping';
 import { actionTypes } from '../../constants/actionTypes';
@@ -45,6 +44,7 @@ const FriendRequest = ({ userProfile }) => {
     if (searchFriend === '') return;
     else {
       dispatch(getFriend(searchFriend));
+      setSearchFriend('');
     }
   };
 
@@ -63,6 +63,7 @@ const FriendRequest = ({ userProfile }) => {
           className={`search-friends`}
           type="text"
           placeholder="Search for friends"
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
         />
         <div
           onClick={handleSearch}

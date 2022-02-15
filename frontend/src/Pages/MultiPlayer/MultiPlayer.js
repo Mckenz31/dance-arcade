@@ -1,51 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import dance from '../../images/bg.png';
-import io from 'socket.io-client';
 import './multiplayer.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createRoom, roomListener, joinRoom } from '../../actions/multiplayer';
+import { getUserData } from '../../actions/friendsAction';
+import Navbar from '../../Components/Navbar/Navbar';
+import { setSpinner } from '../../actions/actions';
+import { useHistory } from 'react-router-dom';
+import { getQueryParams } from '../../utility';
 
-const socket = io.connect('http://localhost:8000');
-
-const MultiPlayer = () => {
-  const [userName, setUserName] = useState('');
+const MultiPlayer = (props) => {
   const [roomId, setRoomId] = useState('');
-  const [currentMsg, setCurrentMsg] = useState('');
-  const [recievedMsg, setRecievedMsg] = useState({});
-  const [roomSize, setRoomSize] = useState(0);
+  const userIdentity = useSelector((state) => state.user.userInfo.email);
+  const userProfileData = useSelector((state) => state.friends.userProfile);
+  const roomDetails = useSelector((state) => state.multiplayer.room);
+  const [userProfile, setUserProfile] = useState({});
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!userProfileData) {
+      dispatch(getUserData(userIdentity));
+    } else {
+      setUserProfile(userProfileData);
+    }
+  }, [dispatch, userIdentity, userProfileData]);
 
   const handleCreateClick = () => {
-    if (userName !== '' && roomId !== '') {
-      socket.emit('join_room', roomId);
+    if (roomId !== '') {
+      const data = {
+        ...userProfile,
+        roomId: roomId
+      };
+      dispatch(createRoom(data));
+      dispatch(roomListener(data));
+      dispatch(setSpinner(true, 'Waiting for Players to join . . . .'));
+      history.push({
+        search: `?user=${userProfile.usName}&room=${roomId}`
+      });
     }
   };
+
+  useEffect(() => {
+    if (props.location.search) {
+      const params = getQueryParams(props.location.search);
+      const data = {
+        ...userProfile,
+        roomId: params.room
+      };
+      dispatch(roomListener(data));
+      dispatch(
+        setSpinner(
+          true,
+          <h4 className="text-white">'Waiting for Players to join . . . .'</h4>
+        )
+      );
+    }
+  }, [props.location.search]);
+
+  useEffect(() => {
+    if (roomDetails) {
+      console.log(roomDetails, 'room');
+      if (roomDetails.creator.userID === userProfile.userID) {
+        // creator
+        if (roomDetails?.joiner) {
+          dispatch(
+            setSpinner(
+              true,
+              <div>
+                <h4 className="text-white">
+                  {roomDetails?.joiner.usName} joined the room
+                </h4>
+              </div>
+            )
+          );
+          history.push({
+            pathname: '/lobby',
+            search: `?user=${userProfile.usName}&room=${roomId}`
+          });
+          dispatch(setSpinner(false, ''));
+        }
+      } else {
+        // joiner
+        if (roomDetails?.creator) {
+          dispatch(
+            setSpinner(
+              true,
+              <h4 className="text-white">
+                Joined in {roomDetails.creator.usName}'s room
+              </h4>
+            )
+          );
+          history.push({
+            pathname: '/lobby',
+            search: `?user=${userProfile.usName}&room=${roomId}`
+          });
+          dispatch(setSpinner(false, ''));
+        }
+      }
+    }
+  }, [roomDetails]);
+
   const handleJoinClick = () => {
-    if (userName !== '' && roomId !== '') {
-      socket.emit('join_room', roomId);
+    if (roomId !== '') {
+      const data = {
+        ...userProfile,
+        roomId: roomId
+      };
+      console.log(data);
+      dispatch(joinRoom(data));
+      history.push({
+        search: `?user=${userProfile.usName}&room=${roomId}`
+      });
     }
-  };
-
-  useEffect(() => {
-    socket.on('recieve_message', (data) => {
-      setRecievedMsg(data);
-    });
-  }, [socket]);
-
-  useEffect(() => {
-    socket.on('room_size', (data) => {
-      setRoomSize(data);
-    });
-  }, [socket]);
-
-  const sendMessage = async (value) => {
-    const messageData = {
-      author: userName,
-      room: roomId,
-      message: value,
-      time:
-        new Date(Date.now()).getHours() +
-        ' : ' +
-        new Date(Date.now()).getMinutes()
-    };
-    await socket.emit('send_message', messageData);
   };
   return (
     <div className="w-100 min-vh-100 position-relative">
@@ -55,19 +122,12 @@ const MultiPlayer = () => {
         className="position-absolute top-0 left-0 right-0 bottom-0 w-100 h-100"
         alt=""
       />
-
-      <div className="w-100 min-vh-100 d-flex justify-content-center align-items-center">
+      <Navbar isMultiplayer />
+      <div className="w-100 d-flex justify-content-center align-items-center">
         <div className="create-room">
-          <h1 className="room-text">Number of Peoples : {roomSize}</h1>
           <div className="d-flex w-100 flex-column">
             <h1 className=" room-text">Multiplayer Mode</h1>
-            <input
-              type="text"
-              placeholder="username"
-              className="room-input"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
+
             <input
               type="text"
               placeholder="room id"
@@ -84,12 +144,6 @@ const MultiPlayer = () => {
               Join Room
             </button>
           </div>
-          <div className="sent mt-4">
-            <input type="text" onChange={(e) => sendMessage(e.target.value)} />
-          </div>
-          <h1 className="text-white">
-            {recievedMsg?.message && recievedMsg.message}
-          </h1>
         </div>
       </div>
     </div>
