@@ -130,7 +130,7 @@ const MultiPlayer = (props) => {
 
             <input
               type="text"
-              placeholder="room id"
+              placeholder="Enter Room Id"
               className="room-input"
               value={roomId}
               onChange={(e) => setRoomId(e.target.value)}

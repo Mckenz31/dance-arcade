@@ -3,8 +3,14 @@ import { auth, db } from '../Components/Firebase/firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { setSpinner, setToast } from './actions';
 
-const { SET_CREATE_ROOM, SET_AUTH_LOADER, SET_TOAST, SET_CHAT_MESSAGES } =
-  actionTypes;
+const {
+  SET_CREATE_ROOM,
+  SET_AUTH_LOADER,
+  SET_TOAST,
+  SET_CHAT_MESSAGES,
+  SET_FINAL_SCORE,
+  SET_ROOM_DETAILS
+} = actionTypes;
 
 export const createRoom = (data) => async (dispatch) => {
   dispatch({ type: SET_AUTH_LOADER, payload: true });
@@ -101,5 +107,23 @@ export const setReady = (data, roomId) => async (dispatch) => {
 export const deleteRoom = (roomId) => async (dispatch) => {
   dispatch({ type: SET_AUTH_LOADER, payload: true });
   db.collection('Game Room').doc(`room-${roomId}`).delete();
+  dispatch({ type: SET_AUTH_LOADER, payload: false });
+};
+export const setTotalScore = (score) => ({
+  type: SET_FINAL_SCORE,
+  payload: score
+});
+
+export const getRoomDetails = (roomId) => async (dispatch) => {
+  dispatch({ type: SET_AUTH_LOADER, payload: true });
+  db.collection('Game Room')
+    .doc(`room-${roomId}`)
+    .get()
+    .then((info) => {
+      if (info.exists) {
+        dispatch({ type: SET_ROOM_DETAILS, payload: info.data() });
+      } else {
+      }
+    });
   dispatch({ type: SET_AUTH_LOADER, payload: false });
 };

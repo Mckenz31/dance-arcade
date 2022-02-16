@@ -76,9 +76,9 @@ const Lobby = (props) => {
         pathname: '/single-player',
         search: `?user=${userProfile.usName}&room=${params.room}`
       });
-      dispatch(setSpinner(false, ''));
       const user = [...roomDetails?.ready, userProfile.userID];
       dispatch(setReady(user, params.room));
+      dispatch(setSpinner(false, ''));
     } else {
       const user = [userProfile.userID];
       dispatch(setReady(user, params.room));
@@ -98,6 +98,7 @@ const Lobby = (props) => {
       }
     }
   }, [roomDetails]);
+
   return (
     <div className="w-100 min-vh-100 position-relative">
       <img

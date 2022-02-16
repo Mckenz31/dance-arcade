@@ -70,7 +70,8 @@ var post = [
   { one: false, two: false, three: true, four: false },
   { one: true, two: false, three: false, four: false },
   { one: false, two: false, three: false, four: true },
-  { one: false, two: false, three: true, four: false }
+  { one: false, two: false, three: true, four: false },
+  { gameEnds: true }
 ];
 
 function onClick() {

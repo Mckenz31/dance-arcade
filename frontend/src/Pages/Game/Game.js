@@ -2,26 +2,31 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import BGM from '../../video/bgm.mp3';
 import { useHistory } from 'react-router-dom';
 import BgVideo from '../../video/bgVideo2.mp4';
+import MultiBgVideo from '../../video/multi.mp4';
 import * as PIXI from 'pixi.js';
-import { GameContainer } from './GameStyles';
+import { GameContainer, GameScoreCard } from './GameStyles';
 import LeftArrow from '../../images/left-arrow.png';
 import RightArrow from '../../images/right.png';
 import { TweenMax, Linear } from 'gsap';
 import GameEndsCard from '../../Components/GameEndsCard/GameEndsCard';
-import axios from 'axios';
 import Timer from '../../Components/Timer/Timer';
-import { useDispatch } from 'react-redux';
 import { getQueryParams } from '../../utility';
-import { deleteRoom } from '../../actions/multiplayer';
+import { useSelector, useDispatch } from 'react-redux';
+import { getRoomDetails, setTotalScore } from '../../actions/multiplayer';
 
 const Game = (props) => {
-  const dispatch = useDispatch();
   const myVar = useRef();
   const history = useHistory();
-  const [data, setData] = useState([]);
-  const [score, setScore] = useState(0);
+  const dispatch = useDispatch();
+  const [finalScore, setFinalScore] = useState(0);
   const [isGameEnds, setIsGameEnds] = useState(false);
   const [startgame, setStartGame] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [otherCounter, setOtherCounter] = useState(0);
+  const [otherFinalScore, setOtherFinalScore] = useState(0);
+  const [animation, setAnimation] = useState(true);
+  const [isMultiplayer, setIsMultiplayer] = useState(false);
+  const roomDetails = useSelector((state) => state.multiplayer.room);
 
   useEffect(() => {
     if (startgame) {
@@ -29,38 +34,207 @@ const Game = (props) => {
       getData();
     }
   }, [startgame]);
+  // console.log(roomDetails, 'roomDetails');
+  useEffect(() => {
+    if (!isMultiplayer) {
+      if (!roomDetails) {
+        const params = getQueryParams(props.location.search);
+        dispatch(getRoomDetails(params.room));
+      }
+    }
+  }, [isMultiplayer, roomDetails]);
 
   const getData = async () => {
-    const data = await axios.get('http://localhost:8000/steps');
-    // const data = [
-    //   //Game data
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: true, three: false, four: false },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: false, three: false, four: true },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: false, three: false, four: true },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: false, three: false, four: true },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: true, three: false, four: false },
-    //   { one: false, two: false, three: true, four: true },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: true, three: false, four: false },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: false, two: false, three: false, four: true },
-    //   { one: false, two: true, three: false, four: false },
-    //   { one: false, two: false, three: true, four: false },
-    //   { one: true, two: false, three: false, four: false },
-    //   { one: false, two: false, three: false, four: true },
-    //   { gameEnds: true }
-    // ];
-    console.log(data, 'game data');
-    PlayArrows(data.data);
+    // const data = await axios.get('http://localhost:8000/steps');
+    //Game data
+    const data = [
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 6,
+        otherScore: 2
+      },
+      {
+        one: false,
+        two: true,
+        three: false,
+        four: false,
+        score: 2,
+        otherScore: 3
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 4,
+        otherScore: 1
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 5,
+        otherScore: 8
+      },
+      {
+        one: false,
+        two: false,
+        three: false,
+        four: true,
+        score: 1,
+        otherScore: 5
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 1,
+        otherScore: 4
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 7,
+        otherScore: 9
+      },
+      {
+        one: false,
+        two: false,
+        three: false,
+        four: true,
+        score: 2,
+        otherScore: 1
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 4,
+        otherScore: 2
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 5,
+        otherScore: 5
+      },
+      {
+        one: false,
+        two: false,
+        three: false,
+        four: true,
+        score: 6,
+        otherScore: 4
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 1,
+        otherScore: 8
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 8,
+        otherScore: 6
+      },
+      {
+        one: false,
+        two: true,
+        three: false,
+        four: false,
+        score: 4,
+        otherScore: 4
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: true,
+        score: 6,
+        otherScore: 1
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 3,
+        otherScore: 3
+      },
+      {
+        one: false,
+        two: true,
+        three: false,
+        four: false,
+        score: 5,
+        otherScore: 9
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 8,
+        otherScore: 0
+      },
+      {
+        one: false,
+        two: false,
+        three: false,
+        four: true,
+        score: 3,
+        otherScore: 1
+      },
+      {
+        one: false,
+        two: true,
+        three: false,
+        four: false,
+        score: 1,
+        otherScore: 2
+      },
+      {
+        one: false,
+        two: false,
+        three: true,
+        four: false,
+        score: 6,
+        otherScore: 8
+      },
+      {
+        one: true,
+        two: false,
+        three: false,
+        four: false,
+        score: 7,
+        otherScore: 3
+      },
+      {
+        one: false,
+        two: false,
+        three: false,
+        four: true,
+        score: 2,
+        otherScore: 5
+      },
+      { gameEnds: true }
+    ];
+    PlayArrows(data);
   };
 
   const bgm = useRef(new Audio(BGM));
@@ -87,8 +261,6 @@ const Game = (props) => {
     [props.app.stage]
   );
   const OnLoad = useCallback(() => {
-    const div = document.querySelector('.showcase');
-    div.style.zIndex = 1000;
     props.app.zOrder = 100;
     document.querySelector('.showcase').appendChild(props.app.view);
     props.app.stage.interactive = true;
@@ -98,54 +270,91 @@ const Game = (props) => {
     CreateArrow(LeftArrow, 0.1, 0.1, 400, 150, -1.575);
   }, [CreateArrow, props.app]);
 
-  const PlayLeftArrow = useCallback(() => {
-    const left = CreateArrow(LeftArrow, 0.1, 0.1, 100, 700);
-    TweenMax.to(left, 2, {
-      y: 150,
-      ease: Linear.easeNone
-    });
-  }, [CreateArrow]);
+  const PlayLeftArrow = useCallback(
+    (score, otherScore) => {
+      const id = setInterval(() => {
+        handleClick(score, otherScore);
+        clearInterval(id);
+      }, 1950);
+      const left = CreateArrow(LeftArrow, 0.1, 0.1, 100, 700);
+      TweenMax.to(left, 2, {
+        y: 150,
+        ease: Linear.easeNone
+      });
+    },
+    [CreateArrow]
+  );
 
-  const PlayUpArrow = useCallback(() => {
-    const up = CreateArrow(LeftArrow, 0.1, 0.1, 200, 700, 1.575);
-    TweenMax.to(up, 2, {
-      y: 150,
-      ease: Linear.easeNone
-    });
-  }, [CreateArrow]);
+  const PlayUpArrow = useCallback(
+    (score, otherScore) => {
+      const id = setInterval(() => {
+        handleClick(score, otherScore);
+        clearInterval(id);
+      }, 1950);
+      const up = CreateArrow(LeftArrow, 0.1, 0.1, 200, 700, 1.575);
+      TweenMax.to(up, 2, {
+        y: 150,
+        ease: Linear.easeNone
+      });
+    },
+    [CreateArrow]
+  );
 
-  const PlayRightArrow = useCallback(() => {
-    const right = CreateArrow(RightArrow, 0.07, 0.06, 300, 700);
-    TweenMax.to(right, 2, {
-      y: 150,
-      ease: Linear.easeNone
-    });
-  }, [CreateArrow]);
+  const PlayRightArrow = useCallback(
+    (score, otherScore) => {
+      const id = setInterval(() => {
+        handleClick(score, otherScore);
+        clearInterval(id);
+      }, 1950);
+      const right = CreateArrow(RightArrow, 0.07, 0.06, 300, 700);
+      TweenMax.to(right, 2, {
+        y: 150,
+        ease: Linear.easeNone
+      });
+    },
+    [CreateArrow]
+  );
 
-  const PlayDownArrow = useCallback(() => {
-    const down = CreateArrow(LeftArrow, 0.1, 0.1, 400, 700, -1.575);
-    TweenMax.to(down, 2, {
-      y: 150,
-      ease: Linear.easeNone
-    });
-  }, [CreateArrow]);
+  const PlayDownArrow = useCallback(
+    (score, otherScore) => {
+      const id = setInterval(() => {
+        handleClick(score, otherScore);
+        clearInterval(id);
+      }, 1950);
+      const down = CreateArrow(LeftArrow, 0.1, 0.1, 400, 700, -1.575);
+      TweenMax.to(down, 2, {
+        y: 150,
+        ease: Linear.easeNone
+      });
+    },
+    [CreateArrow]
+  );
 
-  console.log(props, 'props');
+  const goToScore = () => {
+    const params = getQueryParams(props.location.search);
+    dispatch(setTotalScore(finalScore));
+    if (isMultiplayer) {
+      history.push({
+        pathname: '/score',
+        search: `?room=${params.room}&score=&score=${finalScore}`
+      });
+    } else {
+      history.push({
+        pathname: `/score`,
+        search: `?score=${finalScore}`
+      });
+    }
+  };
 
   const handleEndGame = async () => {
-    const params = getQueryParams(props.location.search);
     setTimeout(async () => {
-      setScore(230);
       setIsGameEnds(true);
       setTimeout(() => {
-        history.push({
-          pathname: '/score',
-          search: `?room=${params.room}`,
-          score: 230
-        });
+        goToScore();
       }, 8000);
     }, 2000);
   };
+
   const PlayArrows = useCallback(
     (data) => {
       var counter = 0;
@@ -159,16 +368,16 @@ const Game = (props) => {
         );
         switch (key) {
           case 'one':
-            PlayLeftArrow();
+            PlayLeftArrow(data[counter].score, data[counter].otherScore);
             break;
           case 'two':
-            PlayUpArrow();
+            PlayUpArrow(data[counter].score, data[counter].otherScore);
             break;
           case 'three':
-            PlayRightArrow();
+            PlayRightArrow(data[counter].score, data[counter].otherScore);
             break;
           case 'four':
-            PlayDownArrow();
+            PlayDownArrow(data[counter].score, data[counter].otherScore);
             break;
           case 'gameEnds':
             handleEndGame();
@@ -181,21 +390,50 @@ const Game = (props) => {
     },
     [PlayDownArrow, PlayUpArrow, PlayLeftArrow, PlayRightArrow]
   );
-  // useEffect(() => {
-  //   if (data.length > 0) {
-  //     console.log(data,'game data')
-  //     PlayArrows(data);
-  //   }
-  // }, [data, PlayArrows]);
+
+  useEffect(() => {
+    const params = getQueryParams(props.location.search);
+    if (Object.keys(params).length === 0) {
+      setIsMultiplayer(false);
+    } else {
+      setIsMultiplayer(true);
+    }
+  }, []);
 
   useEffect(() => {
     OnLoad();
   }, [OnLoad]);
 
+  useEffect(() => {
+    const scores = {
+      user1: {
+        usName: roomDetails?.creator.usName,
+        score: finalScore,
+        userAvatar: roomDetails?.creator.userAvatar
+      },
+      user2: {
+        usName: roomDetails?.joiner.usName,
+        score: otherFinalScore,
+        userAvatar: roomDetails?.creator.userAvatar
+      },
+      isMultiplayer
+    };
+    localStorage.setItem('scores', JSON.stringify(scores));
+  }, [otherFinalScore, roomDetails]);
+
+  const handleClick = (value, otherValue) => {
+    setOtherCounter(otherValue);
+    setCounter(value);
+    setFinalScore((prevScore) => prevScore + value);
+    setOtherFinalScore((prevScore) => prevScore + otherValue);
+    setAnimation(true);
+  };
+
   return (
     <React.Fragment>
-      <GameContainer className="showcase">
-        {isGameEnds && <GameEndsCard score={score} />}
+      <GameContainer style={{ zIndex: '-1000' }} className="showcase">
+        {isGameEnds && <GameEndsCard score={finalScore} />}
+        {/* {isGameEnds && <GameEndsCard score={otherFinalScore} />} uncomment this for player 2 */}
         <section>
           <video
             className="video"
@@ -204,16 +442,45 @@ const Game = (props) => {
             muted
             style={{ zIndex: '-100' }}
           >
-            <source src={BgVideo} type="video/mp4" />
+            <source
+              src={isMultiplayer ? MultiBgVideo : BgVideo}
+              type="video/mp4"
+            />
           </video>
         </section>
         <div className="center">
           <Timer setStartGame={setStartGame} />
         </div>
-        <div className="ml-auto">
-          <h1>13</h1>
-        </div>
+        <div className="relative"></div>
       </GameContainer>
+      {!isGameEnds && (
+        <GameScoreCard style={{ zIndex: 10 }}>
+          <div className="score-con">
+            <h2>
+              {isMultiplayer && roomDetails
+                ? `${roomDetails.creator.usName}'s Score`
+                : 'Current Score'}
+            </h2>
+            <h1
+              className={`${animation ? 'animate-text' : ''}`}
+              onAnimationEnd={() => setAnimation(false)}
+            >
+              {counter}
+            </h1>
+          </div>
+          {isMultiplayer && roomDetails && (
+            <div className="score-con">
+              <h2>{roomDetails.joiner.usName}'s Score</h2>
+              <h1
+                className={`${animation ? 'animate-text' : ''}`}
+                onAnimationEnd={() => setAnimation(false)}
+              >
+                {otherCounter}
+              </h1>
+            </div>
+          )}
+        </GameScoreCard>
+      )}
     </React.Fragment>
   );
 };
