@@ -46,31 +46,190 @@ buttons.on('pressed', (pin) => {
 //Logic
 
 var post = [
-  //Game data
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: true, three: false, four: false },
-  { one: false, two: false, three: true, four: false },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: false, three: false, four: true },
-  { one: false, two: false, three: true, four: false },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: false, three: false, four: true },
-  { one: false, two: false, three: true, four: false },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: false, three: false, four: true },
-  { one: false, two: false, three: true, four: false },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: true, three: false, four: false },
-  { one: false, two: false, three: true, four: true },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: true, three: false, four: false },
-  { one: false, two: false, three: true, four: false },
-  { one: false, two: false, three: false, four: true },
-  { one: false, two: true, three: false, four: false },
-  { one: false, two: false, three: true, four: false },
-  { one: true, two: false, three: false, four: false },
-  { one: false, two: false, three: false, four: true },
-  { one: false, two: false, three: true, four: false },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 6,
+    otherScore: 2
+  },
+  {
+    one: false,
+    two: true,
+    three: false,
+    four: false,
+    score: 2,
+    otherScore: 3
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 4,
+    otherScore: 1
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 5,
+    otherScore: 8
+  },
+  {
+    one: false,
+    two: false,
+    three: false,
+    four: true,
+    score: 1,
+    otherScore: 5
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 1,
+    otherScore: 4
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 7,
+    otherScore: 9
+  },
+  {
+    one: false,
+    two: false,
+    three: false,
+    four: true,
+    score: 2,
+    otherScore: 1
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 4,
+    otherScore: 2
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 5,
+    otherScore: 5
+  },
+  {
+    one: false,
+    two: false,
+    three: false,
+    four: true,
+    score: 6,
+    otherScore: 4
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 1,
+    otherScore: 8
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 8,
+    otherScore: 6
+  },
+  {
+    one: false,
+    two: true,
+    three: false,
+    four: false,
+    score: 4,
+    otherScore: 4
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: true,
+    score: 6,
+    otherScore: 1
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 3,
+    otherScore: 3
+  },
+  {
+    one: false,
+    two: true,
+    three: false,
+    four: false,
+    score: 5,
+    otherScore: 9
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 8,
+    otherScore: 0
+  },
+  {
+    one: false,
+    two: false,
+    three: false,
+    four: true,
+    score: 3,
+    otherScore: 1
+  },
+  {
+    one: false,
+    two: true,
+    three: false,
+    four: false,
+    score: 1,
+    otherScore: 2
+  },
+  {
+    one: false,
+    two: false,
+    three: true,
+    four: false,
+    score: 6,
+    otherScore: 8
+  },
+  {
+    one: true,
+    two: false,
+    three: false,
+    four: false,
+    score: 7,
+    otherScore: 3
+  },
+  {
+    one: false,
+    two: false,
+    three: false,
+    four: true,
+    score: 2,
+    otherScore: 5
+  },
   { gameEnds: true }
 ];
 

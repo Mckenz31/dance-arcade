@@ -13,6 +13,7 @@ import Timer from '../../Components/Timer/Timer';
 import { getQueryParams } from '../../utility';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRoomDetails, setTotalScore } from '../../actions/multiplayer';
+import axios from 'axios';
 
 const Game = (props) => {
   const myVar = useRef();
@@ -34,7 +35,7 @@ const Game = (props) => {
       getData();
     }
   }, [startgame]);
-  // console.log(roomDetails, 'roomDetails');
+
   useEffect(() => {
     if (!isMultiplayer) {
       if (!roomDetails) {
@@ -45,9 +46,10 @@ const Game = (props) => {
   }, [isMultiplayer, roomDetails]);
 
   const getData = async () => {
-    // const data = await axios.get('http://localhost:8000/steps');
+    const data = await axios.get('http://localhost:8000/steps');
     //Game data
-    const data = [
+    /* if backend doesn't work uncomment this and replace line no 240 with PlayArrows(data);
+      const data = [
       {
         one: true,
         two: false,
@@ -234,7 +236,8 @@ const Game = (props) => {
       },
       { gameEnds: true }
     ];
-    PlayArrows(data);
+    */
+    PlayArrows(data.data);
   };
 
   const bgm = useRef(new Audio(BGM));
