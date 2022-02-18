@@ -120,7 +120,7 @@ const Auth = () => {
                 {' '}
                 <GoogleIcon /> &nbsp; Continue with Google
               </button>
-              <p className="reg">
+              <p className="reg mt-3">
                 Don't have an account ?{' '}
                 <span onClick={() => ToggleCss()}>Sign Up</span>
               </p>

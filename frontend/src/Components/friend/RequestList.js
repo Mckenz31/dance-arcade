@@ -1,11 +1,8 @@
+import React from 'react';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  acceptFriendRequest,
-  searchForFriend
-} from '../../actions/friendsAction';
+import { acceptFriendRequest } from '../../actions/friendsAction';
 import { dpMapping } from '../../constants/mapping';
 
 const RequestList = ({ userProfile, friendRequestList }) => {

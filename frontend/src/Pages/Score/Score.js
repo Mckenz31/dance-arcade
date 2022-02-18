@@ -112,7 +112,7 @@ const Score = (props) => {
         )}
         {scores.isMultiplayer && (
           <div className="d-flex flex-column">
-            <div className="user d-flex flex-row">
+            <div className="score-page-user d-flex flex-row">
               <img src={crown} className="crown" alt="" />
               <Avatar
                 shape="square"
@@ -128,7 +128,7 @@ const Score = (props) => {
                 <p className="score-final">{scores?.user1.score}</p>
               </div>
             </div>
-            <div className="user d-flex flex-row">
+            <div className="score-page-user d-flex flex-row">
               <Avatar
                 shape="square"
                 className="ava-radius"

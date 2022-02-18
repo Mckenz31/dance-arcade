@@ -46,14 +46,6 @@ export const searchForFriend = (collection, action) => async (dispatch) => {
         } else {
           dispatch({ type: SET_FRIEND_REQUEST_LIST, payload: snap.data() });
         }
-      } else {
-        dispatch({
-          type: SET_TOAST,
-          payload: {
-            message: 'No User Found with this Email id',
-            showToast: true
-          }
-        });
       }
     });
 };
